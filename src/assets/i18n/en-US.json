@@ -627,7 +627,7 @@
       "DiscardShield":"**Protectionism (Shield Only)**: Discard the leftmost card from the market again."
     },
     "Looting Legion": {
-      "Incite":"**Incite**: Place a mob in a **card:{{suit}}** clearing adjacent to a mob. If you can't, place a mob in an ordered clearing with one of your warriors without a mob. <br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Clearing Tie</i></b>*: Clearing with ruins, then most buildings, and tokens. <br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>No Mobs Left</b></i>*: First remove a Mob from the clearing with the least adjacent Ruins or buildings.*",
+      "Incite":"**Incite**: Place a mob in a **card:{{suit}}** clearing adjacent to a mob. If you can't, place a mob in an ordered clearing with one of your warriors without a mob. <br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Clearing Tie</i></b>*: Clearing with ruins, then most buildings, and tokens.* <br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>No Mobs Left</b></i>*: First remove a Mob from the clearing with the least adjacent Ruins or buildings.*",
       "Score":"**Score**: Score **vp:1** for every 2 clearings you rule.",
       "Discard":"**Discard** the order card."
     }
