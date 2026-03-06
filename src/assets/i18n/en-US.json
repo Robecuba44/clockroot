@@ -83,6 +83,8 @@
     "SympathyBases": "Sympathy & Bases",
     "VagabotDifficultyTrait": "Vagabot, Difficulty, Traits",
     "BotRules": "Corvid Bot Specific Rules",
+    "AcolytesConspiracies": "Acolytes and Conspiracies",
+    "Acolytes": "Acolytes",
     "RulesLizard": "Lizard Rules",
     "RulesRiver": "Riverfolk Rules",
     "Hoard": "The Hoard",
@@ -419,7 +421,7 @@
     },
     "Logical Lizards": {
       "Outcasts": "The most common suit in your Lost Souls is the order. On a tie, the order is **card:bird**.",
-      "Conspiracy": "Perform Conspiracies in **card:{{suit}}** clearings. You will perform the conspiracy shown if able, then remove an acolyte if you did perform it, and continue until you are out of acolytes or cannot conspire."
+      "Conspiracy": "**If you have any acolytes,** perform Conspiracies in **card:{{suit}}** clearings. First, move the conspiracy marker one space to the right, moving it to the leftmost space if it moves from the rightmost space [*press the right arrow button next to the conspiracy track*]. Then, perform the conspiracy of the covered space if able, removing an acolyte if you do. Continue until no acolytes remain."
     },
     "Riverfolk Robots": {
       "StockMarket": "Draw two cards and add them to the Market's right side. Do not draw a card once the Market has reached 5 cards.",
@@ -536,9 +538,7 @@
       "Ministers": "Take the actions of all your swayed ministers from top to bottom. (Your Lords presently give **{{ministerPoints}}** VP)"
     },
     "Logical Lizards": {
-      "Rituals": "**Rituals**: Reveal the top {{difficulty}} cards from your Lost Souls, one at a time, and perform a ritual for each revealed suit.",
-      "RitualsBird":"<br>**card:bird**: Take a Lizard warrior from the clearing with the most Lizard warriors, and place it in the Acolytes box. **Put this card in the DISCARD pile, NOT the Lost Souls pile.**",
-      "RitualsOther":"<br>**card:{{suit}}**: Place a warrior in a **card:{{suit}}** clearing. Then, if you rule there, place a matching garden there. (Clearing Tie: Place warrior in clearing with any open building slots, then most enemy buildings.)"
+      "Rituals": "**Rituals**: Reveal the top {{difficulty}} cards from your Lost Souls, one at a time, and perform a ritual for each revealed suit. <br><br> If the revealed card is **card:bird**, remove a Lizard warrior from the clearing with the most Lizard warriors and place it into the Acolytes box [*add an Acolyte*]. Then, put the revealed pile in the **discard pile** (NOT the Lost Souls pile!) <br><br> Otherwise, place a warrior in a clearing matching the revealed card. Then, if you rule there, place a matching garden there.<br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Clearing Tie</b>: Place warrior in clearing with any open building slots, then most enemy buildings.</i>"
     },
     "Riverfolk Robots": {
       "BuildAndGarrison": "**Build and Garrison**: Place a trade post and {{riverDifficulty}} warriors in a **card:{{suit}}** clearing with no trade post. <br>*(Clearing Tie: Clearing with pieces of player who has the most warriors in payments.)*",
