@@ -1,6 +1,6 @@
 
 :host {
-  --theme-color: #e07a37;
+  --theme-color: #ddd432;
 }
 
 ion-toolbar {
@@ -14,7 +14,7 @@ ion-toolbar {
 :host {
   display: block;   /* Add this */
   width: 100%;      /* Add this */
-  --theme-color: #e07a37;
+  --theme-color: #ddd432;
 }
 
 .acolyte {
@@ -41,14 +41,25 @@ ion-toolbar {
     align-items: center;
     padding-left: 1em;
   }
-.acolyte-wrapper {
+.acolyte-wrapper { /*This stops the higher res images from taking up more of the screen by locking the size of the box... */
   position: relative;
   display: inline-block;
-  margin: 0 5px; /* Add spacing between action images if needed */
+  margin: 0 5px;
+
+  width: 4.5em;       
+  height: 5em;
+
+  @media (min-width: 768px) {
+    width: 6em;     
+    height: 6em;
+  }      
 }
 
-.acolyte-wrapper img {
-  display: block; /* Removes bottom spacing on images */
+.acolyte-wrapper img { /*...and then forcing the image to fit that box*/
+  display: block; 
+  width: 100%;      
+  height: 100%;     
+  object-fit: contain; 
 }
 
 .acolyte-overlay {
@@ -72,4 +83,13 @@ ion-toolbar {
 .building-row {
   display: flex;
   align-items: center;
+}
+
+.acolyte-row-center {
+  justify-content: center;
+  margin-top: 10px; 
+}
+
+.row-additions.center-fix {
+  padding-left: 0; 
 }
