@@ -3,7 +3,7 @@
   "AppTitleShort": "Clockroot",
   "NavTitle": "Bots",
   "CloseText": "Close",
-  "GlobalSettings": "-Below Options Randomize ALL selected Bots-",
+  "GlobalSettings": "-Options Affect All Bots-",
   "Language": "Language",
   "LederPlug": "Get the Clockwork Expansion from Leder Games!",
   "PriorityMaps": "Priority Maps",
@@ -734,5 +734,61 @@
     "Actions": {
       "Undo": "Undo"
         }
-  }
-}
+  },    
+      "Looting Legion": {
+        "section": {
+    
+        },
+        "setup": {
+          "setup0": "Place Chameleandroid in the lowest priority clearing.",
+          "setup1": "Place ego tokens in any order on each space of the ego track (randomly if playing with Patron trait card.)"
+        },
+        "traits": {
+          "charmingName": "Charming Mech",
+          "charmingText": "Chameleandroid is a warrior that ignores rule while moving and can deal 2 rolled hits in battle. Your warriors cannot be removed from the board or be moved outside your turn. Remove ego for hits you take in your clearing.",
+          "cloakingName": "Cloaking Tech",
+          "clockingText":"For a human to initiate battle with you, they must discard a card."
+        },
+        "birdsong": {
+          "reveal":"**Reveal** the top card of the deck as the order card.",
+          "craft": "**Craft** order card for **vp:1** if it shows an available item."
+        },
+        "daylight": {
+          "daylightX": "If no enemies have **fewer** VP, perform Escalated Daylight instead.",
+          "appear":"**Appear**. Move directly to a **card:{{suit}}** clearing with any open building slots, then with the most warriors of the player with the fewest VP. <br>*Player Tie: The player with the fewest VP that is latest in turn order.*",
+          "place":"**Place** ego.",
+          "gentrify":"**Gentrify**. Force the player with the fewest VP to recruit 2 warriors into your clearing. They then may place a token or building (scoring as normal), ignoring placement restrictions. (Buildings must go in open slots; if Vagabond, they may repair or refresh an item.) If they placed a building or token (or repaired/refreshed an item) then place ego. If they didn't, move an ego onto the ID without scoring. <br>*Player Tie: The player with the fewest VP that is latest in turn order.*",
+          "targetX": "**Target**. Move directly to the **card:{{suit}}** clearing where the enemy player with the most VP has the most buildings and tokens, then the fewest warriors, (if Vagabond, move to their clearing now.)<br>*Player Tie: Pick the enemy player with the most VP that is in a clearing and that is first in turn order. If no enemies are in a **card:{{suit}}** clearing, replace the order card until one is. Then, Target.*"
+        },
+        "evening": {
+          "disappear":"*Disappear**. Move directly to the clearing with the fewest tokens, then fewest buildings, then fewest warriors.",
+          "discard":"**Discard** the order card."
+        },
+        "extra": {
+          "ego":"For each ego you can't place when prompted, score **vp:3**. Ego moves with Chameleandroid. Ego is placed in Chameleandroid's clearing. Once per turn, if an effect would try to remove or replace your warrior, remove an ego instead. Once per turn, if an effect would let you place or replace 1 or more warriors anywhere on the map, place an ego in your clearing instead, scoring as normal.",
+          "id":"Ego moved here cannot be removed from here nor placed again."
+    
+        }
+      },
+        "chameleandroid": {
+        "section": {
+    
+        },
+        "setup": {
+    
+        },
+        "traits": {
+    
+        },
+        "birdsong": {
+    
+        },
+        "daylight": {
+    
+        },
+        "evening": {
+    
+        },
+        "extra": {
+          
+}}}
