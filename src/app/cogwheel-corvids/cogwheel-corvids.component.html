@@ -64,7 +64,6 @@
                 slot="start"
                 [value]="diff"
                 (click)="botService.changeDifficulty(bot, diff)"
-                [checked]="bot.difficulty === diff"
               ></ion-radio>
 
               <ion-label class="ion-text-wrap">
@@ -166,19 +165,20 @@
             *ngFor="let plot of [0, 1, 2, 3, 4, 5, 6, 7]"
             [class.in-supply]="bot.customData.stowedPlots < plot"
           />
-              <div class="row-additions">
-                <ion-button
-                  [disabled]="bot.customData.stowedPlots <= -1"
-                  (click)="modifyPlot(-1, $event)"
-                >
-                  <ion-icon name="remove"></ion-icon>
-                </ion-button>
-                <ion-button 
-                  [disabled]="bot.customData.stowedPlots >= 7"
-                  (click)="modifyPlot(1, $event)">
-                  <ion-icon name="add"></ion-icon>
-                </ion-button>
-              </div>
+          <div class="row-additions">
+            <ion-button
+              [disabled]="bot.customData.stowedPlots <= -1"
+              (click)="modifyPlot(-1, $event)"
+            >
+              <ion-icon name="remove"></ion-icon>
+            </ion-button>
+            <ion-button
+              [disabled]="bot.customData.stowedPlots >= 7"
+              (click)="modifyPlot(1, $event)"
+            >
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
         </div>
       </div>
       <ion-card-content>
@@ -188,7 +188,9 @@
               class="plot-toggle click-icon plot-icon"
               *ngFor="let token of [0, 1]"
               [src]="'assets/inicon/plot-' + plot.type + '.png'"
-              [class.in-supply]="bot.customData.plots[plot.type][token] === false"
+              [class.in-supply]="
+                bot.customData.plots[plot.type][token] === false
+              "
               (click)="cyclePlot(plot.type, token)"
             />
           </div>
@@ -266,33 +268,38 @@
   </ion-item>
 </ion-list>
 
-  <ion-item *ngIf="bot.setupHidden">
-    <ion-card>
-      <ion-card-header>
-        <h2 class="birdsong-has-buttons">
-          {{ "Sections.BotRules" | translate }}
-        </h2>
-      </ion-card-header>
-      <ion-card-content>
-        <h4>{{"SpecificExtra.Cogwheel Corvids.Plot-Tokens.Overview" | translate }}
-        </h4>
-                <ol>
-          <li
-            class="rule-message"
-            *ngFor="let message of bot.plotRules(translateService)"
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-        </ol>
-        <h4>{{"SpecificExtra.Cogwheel Corvids.BotInteractions.Overview" | translate }}</h4>
-        <ol>
-          <li
-            class="rule-message"
-            *ngFor="let message of bot.botRules(translateService)"
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-        </ol>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
+<ion-item *ngIf="bot.setupHidden">
+  <ion-card>
+    <ion-card-header>
+      <h2 class="birdsong-has-buttons">
+        {{ "Sections.BotRules" | translate }}
+      </h2>
+    </ion-card-header>
+    <ion-card-content>
+      <h4>
+        {{ "SpecificExtra.Cogwheel Corvids.Plot-Tokens.Overview" | translate }}
+      </h4>
+      <ol>
+        <li
+          class="rule-message"
+          *ngFor="let message of bot.plotRules(translateService)"
+        >
+          <para [bot]="bot" [metadata]="message"></para>
+        </li>
+      </ol>
+      <h4>
+        {{
+          "SpecificExtra.Cogwheel Corvids.BotInteractions.Overview" | translate
+        }}
+      </h4>
+      <ol>
+        <li
+          class="rule-message"
+          *ngFor="let message of bot.botRules(translateService)"
+        >
+          <para [bot]="bot" [metadata]="message"></para>
+        </li>
+      </ol>
+    </ion-card-content>
+  </ion-card>
+</ion-item>

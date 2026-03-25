@@ -64,7 +64,6 @@
                 slot="start"
                 [value]="diff"
                 (click)="botService.changeDifficulty(bot, diff)"
-                [checked]="bot.difficulty === diff"
               ></ion-radio>
 
               <ion-label class="ion-text-wrap">
@@ -183,7 +182,7 @@
                       src="assets/inicon/meeple-duchy.png"
                       class="meeple"
                     />
-                  </div> 
+                  </div>
                 </div>
               </div>
             </div>
@@ -211,7 +210,10 @@
 
             <div class="building-row" *ngFor="let num of [0]">
               <div class="row-icon burrow">
-                <img id="burrow" [src]="'assets/inicon/' + 'building-burrow.png'" />
+                <img
+                  id="burrow"
+                  [src]="'assets/inicon/' + 'building-burrow.png'"
+                />
               </div>
 
               <div class="row-additions">

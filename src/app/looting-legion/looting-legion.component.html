@@ -64,7 +64,6 @@
                 slot="start"
                 [value]="diff"
                 (click)="botService.changeDifficulty(bot, diff)"
-                [checked]="bot.difficulty === diff"
               ></ion-radio>
 
               <ion-label class="ion-text-wrap">
@@ -153,44 +152,52 @@
     <app-bot-resources [bot]="bot"></app-bot-resources>
   </ion-item>
 
-<ion-item *ngIf="bot.setupHidden">
+  <ion-item *ngIf="bot.setupHidden">
     <ion-card>
       <ion-card-header>
-        <h2>{{ "Sections.Hoard" | translate}}</h2>
+        <h2>{{ "Sections.Hoard" | translate }}</h2>
       </ion-card-header>
       <ion-card-content>
-        
         <div class="building-row wrap">
           <div class="flip-container" *ngFor="let num of [0, 1, 2, 3]">
-            <div class="flip-icon hoard-container"
-            (click)="removeHoardItem($event, num)"
+            <div
+              class="flip-icon hoard-container"
+              (click)="removeHoardItem($event, num)"
             >
               <img
                 *ngIf="bot.customData.hoardItems[num]"
-                [src]="'assets/inicon/token-item-' + bot.customData.hoardItems[num] + '.png'"
+                [src]="
+                  'assets/inicon/token-item-' +
+                  bot.customData.hoardItems[num] +
+                  '.png'
+                "
                 class="hoard-item"
               />
             </div>
           </div>
         </div>
-        
-        <br /> <div class="building-row wrap">
-          <div class="flip-container" *ngFor="let item of bot.customData.itemList">
+
+        <br />
+        <div class="building-row wrap">
+          <div
+            class="flip-container"
+            *ngFor="let item of bot.customData.itemList"
+          >
             <div class="flip-icon hoard-container">
-              <img 
+              <img
                 [src]="'assets/inicon/token-item-' + item + '.png'"
                 class="flip-front hoard-item"
-                (click)="addHoardItems($event, item)" 
+                (click)="addHoardItems($event, item)"
               />
             </div>
           </div>
         </div>
-          <a
-            class="rule-message"
-            *ngFor="let message of bot.extra(translateService)"
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </a>
+        <a
+          class="rule-message"
+          *ngFor="let message of bot.extra(translateService)"
+        >
+          <para [bot]="bot" [metadata]="message"></para>
+        </a>
       </ion-card-content>
     </ion-card>
   </ion-item>
