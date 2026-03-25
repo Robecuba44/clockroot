@@ -12,10 +12,9 @@ Resources:
 
 ## Running The App
 
-Requires nodejs and you may need to declare an option because it's using an older version of node.
+Requires nodejs
 
 - `npm i`
-- export NODE_OPTIONS=--openssl-legacy-provider
 - `npm run start`
 
 ## Building The App
@@ -34,7 +33,7 @@ This will build it in prod mode.
 - `src/app/models/index.ts` add an export for `<faction>.ts`
 - `src/app/home/home.module.ts` - add the new bot component to `declarations`
 - `src/app/faction-menu/faction-menu.html` - add a new category to the dropdown for the new bot
-- `src/app/faction-menu/faction-menu.ts` - add in the new factions and categories (and add new icons to `/app/assets/inicon/<faction>.png`
+- `src/app/faction-menu/faction-menu.ts` - add in the new factions and categories (and add new icons to `/app/assets/inicon/<faction>.png`)
 - `src/app/bot.service.ts` - update imports for new faction
 - `src/assets/i18n/en-US.json` - add the faction name to `FactionsShort` and `Factions`
 
@@ -74,37 +73,6 @@ this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Cogwheel Cor
 - https://www.reddit.com/r/rootgame/comments/13gy8pe/does_anyone_have_like_pngs_of_the_meeple_icons/
 - https://therootdatabase.com/workshop/
 
-```
-Updating ecosystem checklist
+### Angular migration
 
-[x] Current: Angular 8.1.2 -> Projected: Angular 17+
-[] Current: TSLint -> Projected: ESLint
-[] Current: core-js -> Projected: includes legacy polyfills which support outdated browsers that are no longer relevant
-[] Node_modules dependency vulnerabilities
-[] tsconfig.json enables 'fullTemplateTypeCheck' the underlying tooling stack is too old to benefit from modern static analysis
-
-Path: incremental update of angular CLI and core libraries
-Run the angular migration schematic for eslint
-Run npm audit to identify and fix critical vulnerabilities in the dependency tree
-```
-
-[] Toolbar for randomization is completely broken
-[] Angular 17 was last version that was not apparently totally broken
-[] Remove rules in eslint.config.ts to work through type problems
-
-```
-Don't look at this as a beautiful, shique, modernization. This is a dirty start to get in the mud.
-
-Ran the full sweep of updates for Angular, Ionic, Lint, and dependencies to bring the project up to date. I got sick of dealing with the outdated stuff so I just bit the bullet and did it. Treat this as a draft so you can just give me the wavetops on how/if you want to bother dealing with this migration. I tried to keep the commits iterative so it can be reverted to the version you're comfortable with if you want to upgrade but not dive into the full experience. Happy to make this a quick conversation to meet your vision.
-
-Angular: Updated one version at a time from Angular 8 -> Angular 21.2.3 (https://angular.dev/update-guide?v=9.1-21.0&l=1)
-Ionic: Updated as needed from Ionic 4 -> Ionic 7.2.1
-Lint: Migrated from TSLint to ESLint (https://github.com/angular-eslint/angular-eslint/blob/main/docs/MIGRATING_FROM_TSLINT.md)
-```
-
-[] Toolbar randomization (may actually just be a broken difficulty selection in the html)
-[] Color for Text
-[] Slight margin for bot html
-[x] Text color for language display
-[] Check marquise display for a 6th random li
-[] marquise displays at 66% width?
+This project migrated from Angular 8->22. If something looks funky it was probably because of the schematics/auto fixes implemented or the quick band-aids to fix broken SCSS or NG0100 errors (I hate them)
