@@ -22,7 +22,7 @@
           </ion-item>
 
           <ion-menu-toggle autoHide="false">
-            @for (bot of botService.bots; track bot) {
+            @for (bot of botService.menuBots(); track bot) {
               <ion-item
                 color="transparent"
                 class="bot"
@@ -93,6 +93,7 @@
           <ion-item class="difficulty">
             <ion-label>Set All Difficulties</ion-label>
             <ion-select
+              class="select-wrapper"
               [value]="selectedDifficulty"
               (ionChange)="changeAllDifficulties($event.detail.value)"
             >
@@ -118,6 +119,7 @@
           <ion-item class="traits">
             <ion-label>Traits to Randomize</ion-label>
             <ion-select
+              class="select-wrapper"
               [value]="selectedTraitCount"
               (ionChange)="selectedTraitCount = $event.detail.value"
             >

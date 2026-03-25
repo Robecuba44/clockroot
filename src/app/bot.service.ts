@@ -29,8 +29,19 @@ export class BotService {
   private readonly botsLengthSig = signal(0);
   readonly splitPaneDisabled = computed(() => this.botsLengthSig() === 0);
 
+  /**
+   * App shell menu iterates this signal so list updates use signal-based CD.
+   * Plain `bots` + ion-item img [src] was still hitting NG0100 after popover dismiss.
+   */
+  private readonly menuBotsSig = signal<Bot[]>([]);
+  readonly menuBots = this.menuBotsSig.asReadonly();
+
   private syncSplitPaneFromBots(): void {
     this.botsLengthSig.set(this.bots.length);
+  }
+
+  private syncMenuBotsFromSource(): void {
+    this.menuBotsSig.set([...this.bots]);
   }
 
   public botHash: Record<BotName, unknown> = {
@@ -227,6 +238,7 @@ export class BotService {
     }
 
     this.bots = [...this.bots, bot];
+    this.syncMenuBotsFromSource();
     this.saveBots();
   }
 
@@ -246,6 +258,7 @@ export class BotService {
           handler: () => {
             this.ngZone.run(() => {
               this.bots = this.bots.filter((x) => x !== bot);
+              this.syncMenuBotsFromSource();
               this.saveBots();
             });
           },
@@ -258,6 +271,7 @@ export class BotService {
 
   public clearBots() {
     this.bots = [];
+    this.syncMenuBotsFromSource();
     this.saveBots();
   }
 
@@ -362,6 +376,7 @@ export class BotService {
       this.generateTraitHash(botRef);
       this.bots.push(botRef);
     });
+    this.syncMenuBotsFromSource();
     this.syncSplitPaneFromBots();
   }
 

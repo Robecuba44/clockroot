@@ -267,3 +267,12 @@ ion-button.transparent {
 ion-toast {
   --button-color: var(--ion-color-light);
 }
+
+ion-list.no-pointer ion-item {
+  width: 98%;
+  margin: 0 auto;
+}
+ion-list.no-pointer ion-item ion-card {
+  border: 1px solid rgba(var(--ion-color-dark-rgb), 0.15);
+  border-radius: 10px;
+}
