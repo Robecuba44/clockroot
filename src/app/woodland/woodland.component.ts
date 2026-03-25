@@ -4,9 +4,10 @@ import { BotService } from '../bot.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-woodland',
-  templateUrl: './woodland.component.html',
-  styleUrls: ['./woodland.component.scss'],
+    selector: 'app-woodland',
+    templateUrl: './woodland.component.html',
+    styleUrls: ['./woodland.component.scss'],
+    standalone: false
 })
 export class WoodlandComponent implements OnInit {
 

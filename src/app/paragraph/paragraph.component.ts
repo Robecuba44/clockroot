@@ -15,6 +15,7 @@ export interface MetaData {
     selector: 'para',
     templateUrl: './paragraph.component.html',
     styleUrls: ['./paragraph.component.scss'],
+    standalone: false
 })
 
 export class ParagraphComponent implements OnInit {

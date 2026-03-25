@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-marquise",
-  templateUrl: "./marquise.component.html",
-  styleUrls: ["./marquise.component.scss"],
+    selector: "app-marquise",
+    templateUrl: "./marquise.component.html",
+    styleUrls: ["./marquise.component.scss"],
+    standalone: false
 })
 export class MarquiseComponent implements OnInit {
   @Input() public bot: MarquiseBot;

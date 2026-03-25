@@ -3,9 +3,10 @@ import { Bot, Item } from '../models/bot';
 import { BotService } from '../bot.service';
 
 @Component({
-  selector: 'app-bot-resources',
-  templateUrl: './bot-resources.component.html',
-  styleUrls: ['./bot-resources.component.scss'],
+    selector: 'app-bot-resources',
+    templateUrl: './bot-resources.component.html',
+    styleUrls: ['./bot-resources.component.scss'],
+    standalone: false
 })
 export class BotResourcesComponent implements OnInit {
 

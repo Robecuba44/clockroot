@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-eyrie",
-  templateUrl: "./eyrie.component.html",
-  styleUrls: ["./eyrie.component.scss"],
+    selector: "app-eyrie",
+    templateUrl: "./eyrie.component.html",
+    styleUrls: ["./eyrie.component.scss"],
+    standalone: false
 })
 export class EyrieComponent implements OnInit {
   @Input() public bot: EyrieBot;

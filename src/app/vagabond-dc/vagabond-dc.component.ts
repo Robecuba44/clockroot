@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-vagabond-dc",
-  templateUrl: "./vagabond-dc.component.html",
-  styleUrls: ["./vagabond-dc.component.scss"],
+    selector: "app-vagabond-dc",
+    templateUrl: "./vagabond-dc.component.html",
+    styleUrls: ["./vagabond-dc.component.scss"],
+    standalone: false
 })
 export class VagabondDCComponent implements OnInit {
   @Input() public bot: VagaBotDC;

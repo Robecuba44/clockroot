@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-duchy",
-  templateUrl: "./drillbit-duchy.component.html",
-  styleUrls: ["./drillbit-duchy.component.scss"],
+    selector: "app-duchy",
+    templateUrl: "./drillbit-duchy.component.html",
+    styleUrls: ["./drillbit-duchy.component.scss"],
+    standalone: false
 })
 export class DuchyComponent implements OnInit {
   @Input() public bot: DuchyBot;

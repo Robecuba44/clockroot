@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-priority-modal',
-  templateUrl: './priority-modal.component.html',
-  styleUrls: ['./priority-modal.component.scss'],
+    selector: 'app-priority-modal',
+    templateUrl: './priority-modal.component.html',
+    styleUrls: ['./priority-modal.component.scss'],
+    standalone: false
 })
 export class PriorityModalComponent implements OnInit {
 

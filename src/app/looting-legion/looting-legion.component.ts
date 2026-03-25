@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-legion",
-  templateUrl: "./looting-legion.component.html",
-  styleUrls: ["./looting-legion.component.scss"],
+    selector: "app-legion",
+    templateUrl: "./looting-legion.component.html",
+    styleUrls: ["./looting-legion.component.scss"],
+    standalone: false
 })
 export class LegionComponent implements OnInit {
   @Input() public bot: LegionBot;

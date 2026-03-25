@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-lizard",
-  templateUrl: "./logical-lizards.component.html",
-  styleUrls: ["./logical-lizards.component.scss"],
+    selector: "app-lizard",
+    templateUrl: "./logical-lizards.component.html",
+    styleUrls: ["./logical-lizards.component.scss"],
+    standalone: false
 })
 export class LizardComponent implements OnInit {
   @Input() public bot: LizardBot;

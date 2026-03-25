@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-corvid",
-  templateUrl: "./cogwheel-corvids.component.html",
-  styleUrls: ["./cogwheel-corvids.component.scss"],
+    selector: "app-corvid",
+    templateUrl: "./cogwheel-corvids.component.html",
+    styleUrls: ["./cogwheel-corvids.component.scss"],
+    standalone: false
 })
 export class CorvidComponent implements OnInit {
   @Input() public bot: CorvidBot;

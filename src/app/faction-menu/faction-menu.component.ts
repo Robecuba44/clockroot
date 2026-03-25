@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-faction-menu',
-  templateUrl: './faction-menu.component.html',
-  styleUrls: ['./faction-menu.component.scss'],
+    selector: 'app-faction-menu',
+    templateUrl: './faction-menu.component.html',
+    styleUrls: ['./faction-menu.component.scss'],
+    standalone: false
 })
 export class FactionMenuComponent implements OnInit {
 

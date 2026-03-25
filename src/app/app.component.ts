@@ -10,9 +10,10 @@ const INITIAL_SEARCH = window.location.search;
 const INITIAL_HASH = window.location.hash;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
 

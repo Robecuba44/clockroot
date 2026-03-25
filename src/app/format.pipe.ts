@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { RendererService } from './renderer.service';
 
 @Pipe({
-  name: 'format'
+    name: 'format',
+    standalone: false
 })
 export class FormatPipe implements PipeTransform {
 

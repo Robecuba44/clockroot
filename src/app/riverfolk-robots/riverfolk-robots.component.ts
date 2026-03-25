@@ -4,9 +4,10 @@ import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-riverfolk",
-  templateUrl: "./riverfolk-robots.component.html",
-  styleUrls: ["./riverfolk-robots.component.scss"],
+    selector: "app-riverfolk",
+    templateUrl: "./riverfolk-robots.component.html",
+    styleUrls: ["./riverfolk-robots.component.scss"],
+    standalone: false
 })
 export class RiverfolkComponent implements OnInit {
   @Input() public bot: RiverfolkBot;
