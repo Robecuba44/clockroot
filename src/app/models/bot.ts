@@ -33,7 +33,7 @@ export abstract class Bot {
   public abstract setupPosition: string;
 
   public traitHash: Record<string, boolean> = {};
-  public setupHidden: boolean;
+  public setupHidden = false;
 
   public setupRules: string[] = [];
   public difficulty: Difficulty = 'Normal';

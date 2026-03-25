@@ -1,15 +1,18 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { MarquiseBotDC } from "../models/marquise-dc";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-marquise-dc",
-    templateUrl: "./marquise-dc.component.html",
-    styleUrls: ["./marquise-dc.component.scss"],
-    standalone: false
+  selector: "app-marquise-dc",
+  templateUrl: "./marquise-dc.component.html",
+  styleUrls: ["./marquise-dc.component.scss"],
+  standalone: false,
 })
 export class MarquiseDCComponent implements OnInit {
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
+
   @Input() public bot: MarquiseBotDC;
 
   public buildings = [
@@ -17,11 +20,6 @@ export class MarquiseDCComponent implements OnInit {
     { suit: "bunny", building: "workshop" },
     { suit: "mouse", building: "recruiter" },
   ];
-
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
 
   ngOnInit() {
     ["fox", "bunny", "mouse"].forEach((suit) => {

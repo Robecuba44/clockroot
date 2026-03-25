@@ -11,9 +11,11 @@
 <ion-content fullscreen>
 
   <div class="button-bar">
-    <ion-button *ngFor="let button of buttonsAndImages" 
+    @for (button of buttonsAndImages; track button) {
+<ion-button 
                 [disabled]="img === button.map"
                 (click)="changeMap(button.map)">{{ 'Priorities.' + button.name | translate }}</ion-button>
+}
   </div>
 
   <div class="map-container">

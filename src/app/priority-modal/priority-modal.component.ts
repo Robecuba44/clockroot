@@ -1,38 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, inject } from "@angular/core";
+import { ModalController } from "@ionic/angular";
 
 @Component({
-    selector: 'app-priority-modal',
-    templateUrl: './priority-modal.component.html',
-    styleUrls: ['./priority-modal.component.scss'],
-    standalone: false
+  selector: "app-priority-modal",
+  templateUrl: "./priority-modal.component.html",
+  styleUrls: ["./priority-modal.component.scss"],
+  standalone: false,
 })
-export class PriorityModalComponent implements OnInit {
+export class PriorityModalComponent {
+  private modalCtrl = inject(ModalController);
 
-  public img = 'fall';
+  public img = "fall";
 
   public buttonsAndImages = [
     {
-      name: 'Fall',
-      map: 'fall'
+      name: "Fall",
+      map: "fall",
     },
     {
-      name: 'Winter',
-      map: 'winter'
+      name: "Winter",
+      map: "winter",
     },
     {
-      name: 'Lake',
-      map: 'lake'
+      name: "Lake",
+      map: "lake",
     },
     {
-      name: 'Mountain',
-      map: 'mountain'
-    }
+      name: "Mountain",
+      map: "mountain",
+    },
   ];
-
-  constructor(private modalCtrl: ModalController) { }
-
-  ngOnInit() {}
 
   changeMap(img) {
     this.img = img;
@@ -41,5 +38,4 @@ export class PriorityModalComponent implements OnInit {
   dismiss() {
     this.modalCtrl.dismiss();
   }
-
 }

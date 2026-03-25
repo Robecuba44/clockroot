@@ -1,6 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
 import { addIcons } from "ionicons";
@@ -19,20 +19,20 @@ const INITIAL_HASH = window.location.hash;
 
 @Component({
   selector: "app-root",
-  standalone: false,
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
+  private translateService = inject(TranslateService);
+  private route = inject(ActivatedRoute);
+  botService = inject(BotService);
+
   public language: string;
   public selectedTraitCount = 1;
   public selectedDifficulty = "Challenging";
 
-  constructor(
-    private translateService: TranslateService,
-    private route: ActivatedRoute,
-    public botService: BotService,
-  ) {
+  constructor() {
     addIcons({
       shuffle,
       trash,
@@ -45,27 +45,29 @@ export class AppComponent implements OnInit {
     this.language = localStorage.getItem("lang");
     if (!this.language) {
       const baseLang = navigator.language || "en-US";
-      baseLang.split("-")[0] === "fr"
-        ? (this.language = "fr-FR")
-        : baseLang.split("-")[0] === "es"
-          ? (this.language = "es-ES")
-          : baseLang.split("-")[0] === "de"
-            ? (this.language = "de-DE")
-            : baseLang.split("-")[0] === "ja"
-              ? (this.language = "ja-JP")
-              : baseLang.split("-")[0] === "ko"
-                ? (this.language = "ko-KR")
-                : baseLang.split("-")[0] === "nl"
-                  ? (this.language = "nl-NL")
-                  : baseLang.split("-")[0] === "pl"
-                    ? (this.language = "pl-PL")
-                    : baseLang.split("-")[0] === "pt"
-                      ? (this.language = "pt-BR")
-                      : baseLang.split("-")[0] === "ru"
-                        ? (this.language = "ru-RU")
-                        : baseLang.split("-")[0] === "zh"
-                          ? (this.language = "zh-CN")
-                          : (this.language = "en-US");
+      if (baseLang.split("-")[0] === "fr") {
+        this.language = "fr-FR";
+      } else if (baseLang.split("-")[0] === "es") {
+        this.language = "es-ES";
+      } else if (baseLang.split("-")[0] === "de") {
+        this.language = "de-DE";
+      } else if (baseLang.split("-")[0] === "ja") {
+        this.language = "ja-JP";
+      } else if (baseLang.split("-")[0] === "ko") {
+        this.language = "ko-KR";
+      } else if (baseLang.split("-")[0] === "nl") {
+        this.language = "nl-NL";
+      } else if (baseLang.split("-")[0] === "pl") {
+        this.language = "pl-PL";
+      } else if (baseLang.split("-")[0] === "pt") {
+        this.language = "pt-BR";
+      } else if (baseLang.split("-")[0] === "ru") {
+        this.language = "ru-RU";
+      } else if (baseLang.split("-")[0] === "zh") {
+        this.language = "zh-CN";
+      } else {
+        this.language = "en-US";
+      }
     }
 
     this.updateTranslate();

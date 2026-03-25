@@ -22,7 +22,8 @@
           </ion-item>
 
           <ion-menu-toggle autoHide="false">
-            <ng-container *ngFor="let bot of botService.bots">
+            @for (bot of botService.bots; track bot) {
+
               <ion-item
                 color="transparent"
                 class="bot"
@@ -40,11 +41,14 @@
                   "Factions." + botService.botMeta[bot.name].fullName
                     | translate
                 }}
-                <em class="ion-margin-start" *ngIf="!bot.setupHidden"
+                @if (!bot.setupHidden) {
+<em class="ion-margin-start"
                   >({{ "NeedsSetup" | translate }})</em
                 >
+}
               </ion-item>
-            </ng-container>
+            
+}
             <ion-item (click)="botService.showPriorities()">
               <div class="inline-icon ion-margin-end"></div>
               {{ "PriorityMaps" | translate }}

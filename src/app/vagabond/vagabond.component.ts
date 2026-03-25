@@ -1,15 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { VagaBot } from '../models/vagabond';
-import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Input, inject } from "@angular/core";
+import { VagaBot } from "../models/vagabond";
+import { BotService } from "../bot.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: 'app-vagabond',
-    templateUrl: './vagabond.component.html',
-    styleUrls: ['./vagabond.component.scss'],
-    standalone: false
+  selector: "app-vagabond",
+  templateUrl: "./vagabond.component.html",
+  styleUrls: ["./vagabond.component.scss"],
+  standalone: false,
 })
-export class VagabondComponent implements OnInit {
+export class VagabondComponent {
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
   @Input() public bot: VagaBot;
 
@@ -18,25 +20,22 @@ export class VagabondComponent implements OnInit {
   }
 
   public get battleTrackBonus(): string {
-    const total = Object.values(this.bot.customData.satchelItems)
-      .filter(x => x === 3)
-      .length;
+    const total = Object.values(this.bot.customData.satchelItems).filter(
+      (x) => x === 3,
+    ).length;
 
     switch (total) {
-      case 0: return 'BattleTrack0';
-      case 1: return 'BattleTrack1';
-      case 2: return 'BattleTrack2';
-      case 3: return 'BattleTrack3';
-      default: return 'You have too many, or not enough battle track items.';
+      case 0:
+        return "BattleTrack0";
+      case 1:
+        return "BattleTrack1";
+      case 2:
+        return "BattleTrack2";
+      case 3:
+        return "BattleTrack3";
+      default:
+        return "You have too many, or not enough battle track items.";
     }
-  }
-
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService
-  ) { }
-
-  ngOnInit() {
   }
 
   changeVaga(newVaga) {
@@ -63,5 +62,4 @@ export class VagabondComponent implements OnInit {
     this.bot.customData.currentSuit = suit;
     this.botService.saveBots();
   }
-
 }

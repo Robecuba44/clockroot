@@ -12,11 +12,13 @@
 
       <ion-item>
         <div class="flip-container">
-          <div class="flip-icon" *ngFor="let item of itemOrder">
+          @for (item of itemOrder; track item) {
+<div class="flip-icon">
             <img [src]="'assets/inicon/token-item-' + itemImages[item] + '.png'"
                  [ngClass]="{ 'flip-front': bot.items[item], 'flip-back': !bot.items[item] }"
                  (click)="toggleItem(item)" />
           </div>
+}
         </div>
       </ion-item>
     </ion-list>

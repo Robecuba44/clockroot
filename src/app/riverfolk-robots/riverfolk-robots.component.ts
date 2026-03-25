@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { RiverfolkBot } from "../models/riverfolk";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-riverfolk",
-    templateUrl: "./riverfolk-robots.component.html",
-    styleUrls: ["./riverfolk-robots.component.scss"],
-    standalone: false
+  selector: "app-riverfolk",
+  templateUrl: "./riverfolk-robots.component.html",
+  styleUrls: ["./riverfolk-robots.component.scss"],
+  standalone: false,
 })
 export class RiverfolkComponent implements OnInit {
-  @Input() public bot: RiverfolkBot;
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
+  @Input() public bot: RiverfolkBot;
 
   public buildings = [
     { suit: "fox", building: "tradingpost" },

@@ -1,6 +1,6 @@
 //Leave the imports alone, change literally everything else
 import { TranslateService } from '@ngx-translate/core';
-import { Bot, BotName } from './bot';
+import { Bot, BotName, Rule } from './bot';
 
 export class LegionBot extends Bot { 
 
@@ -20,7 +20,7 @@ export class LegionBot extends Bot {
     Nightmare: `Nightmare`
   };
 
-  public rules = [
+  public rules: Rule[] = [
     {
       traitName: 'Automated Looters',
       name: 'RuleAutomatedLooters',

@@ -40,10 +40,14 @@ module.exports = defineConfig([
       angular.configs.templateAccessibility,
     ],
     rules: {
-      //  THESE SHOULD BE REMOVED TO PROCESS THE ESLINT STRICT MODE
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-inferrable-types": "warn",
-      "@angular-eslint/no-empty-lifecycle-method": "off",
+      // Temporarily warn until accessibility pass is done
+      "@angular-eslint/template/click-events-have-key-events": "warn",
+      "@angular-eslint/template/interactive-supports-focus": "warn",
+      "@angular-eslint/template/alt-text": "warn",
     },
+  },
+  // eslint.config.js — add at the TOP of the defineConfig array
+  {
+    ignores: [".angular/**", "www/**", "node_modules/**", "dist/**"],
   },
 ]);

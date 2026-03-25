@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { LegionBot } from "../models/legion";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-legion",
-    templateUrl: "./looting-legion.component.html",
-    styleUrls: ["./looting-legion.component.scss"],
-    standalone: false
+  selector: "app-legion",
+  templateUrl: "./looting-legion.component.html",
+  styleUrls: ["./looting-legion.component.scss"],
+  standalone: false,
 })
 export class LegionComponent implements OnInit {
-  @Input() public bot: LegionBot;
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
+  @Input() public bot: LegionBot;
 
   ngOnInit() {
     this.bot.customData.hoardItems = this.bot.customData.hoardItems || [];

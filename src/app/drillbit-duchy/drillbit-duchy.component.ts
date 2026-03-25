@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { DuchyBot } from "../models/duchy";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-duchy",
-    templateUrl: "./drillbit-duchy.component.html",
-    styleUrls: ["./drillbit-duchy.component.scss"],
-    standalone: false
+  selector: "app-duchy",
+  templateUrl: "./drillbit-duchy.component.html",
+  styleUrls: ["./drillbit-duchy.component.scss"],
+  standalone: false,
 })
 export class DuchyComponent implements OnInit {
-  @Input() public bot: DuchyBot;
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
+  @Input() public bot: DuchyBot;
   ngOnInit() {
     this.bot.customData.citadels = this.bot.customData.citadels || [
       false,

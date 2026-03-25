@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { EyrieBotDC } from "../models/eyrie-dc";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-eyrie-dc",
-    templateUrl: "./eyrie-dc.component.html",
-    styleUrls: ["./eyrie-dc.component.scss"],
-    standalone: false
+  selector: "app-eyrie-dc",
+  templateUrl: "./eyrie-dc.component.html",
+  styleUrls: ["./eyrie-dc.component.scss"],
+  standalone: false,
 })
 export class EyrieDCComponent implements OnInit {
-  @Input() public bot: EyrieBotDC;
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
+  @Input() public bot: EyrieBotDC;
 
   ngOnInit() {
     this.bot.customData.buildings = this.bot.customData.buildings || [];

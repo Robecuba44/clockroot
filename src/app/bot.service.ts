@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 
 import { Bot, Difficulty, Rule, Item, BotName } from "./models/bot";
 import { MarquiseBot } from "./models/marquise";
@@ -21,7 +21,10 @@ import { PriorityModalComponent } from "./priority-modal/priority-modal.componen
   providedIn: "root",
 })
 export class BotService {
-  public botHash: Record<BotName, any> = {
+  private modalCtrl = inject(ModalController);
+  private alertCtrl = inject(AlertController);
+
+  public botHash: Record<BotName, unknown> = {
     Marquise: MarquiseBot,
     Eyrie: EyrieBot,
     Woodland: WoodlandBot,
@@ -137,7 +140,7 @@ export class BotService {
     return Math.round(Math.floor(Math.random() * (max - min + 1))) + min;
   }
 
-  private shuffleArray(array: any[]) {
+  private shuffleArray(array: unknown[]) {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -146,10 +149,7 @@ export class BotService {
     return shuffled;
   }
 
-  constructor(
-    private modalCtrl: ModalController,
-    private alertCtrl: AlertController,
-  ) {
+  constructor() {
     this.loadBots();
     this.checkUrlForBots();
   }
@@ -165,7 +165,7 @@ export class BotService {
       const botNames = botsParam.split(",") as BotName[];
       botNames.forEach((name) => {
         if (this.botHash[name]) {
-          const newBot = new this.botHash[name]();
+          const newBot = new (this.botHash[name] as new () => Bot)();
           this.addBot(newBot);
         }
       });
@@ -205,7 +205,7 @@ export class BotService {
         const shuffled = this.shuffleArray(togglableRules);
         const amountToSelect = num === 99 ? shuffled.length : num;
         const selectedRules = shuffled.slice(0, amountToSelect);
-        selectedRules.forEach((rule) => (rule.isActive = true));
+        selectedRules.forEach((rule) => ((rule as Rule).isActive = true));
       }
     });
 
@@ -267,8 +267,12 @@ export class BotService {
     this.saveBots();
   }
 
-  public changeDifficulty(bot: Bot, difficulty: Difficulty) {
-    bot.difficulty = difficulty;
+  public changeDifficulty(bot: Bot, difficulty: Difficulty | string) {
+    const allowed: Difficulty[] = ["Easy", "Normal", "Challenging", "Nightmare"];
+    if (!allowed.includes(difficulty as Difficulty)) {
+      return;
+    }
+    bot.difficulty = difficulty as Difficulty;
     this.saveBots();
   }
 
@@ -327,7 +331,7 @@ export class BotService {
       const botRef = new this.botHash[bot.name]();
 
       botRef.difficulty = bot.difficulty;
-      botRef.setupHidden = bot.setupHidden;
+      botRef.setupHidden = !!bot.setupHidden;
       botRef.vp = bot.vp;
       botRef.items = bot.items;
       botRef.traitHash = botRef.traitHash || {};

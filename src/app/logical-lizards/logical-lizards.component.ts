@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 import { LizardBot } from "../models/lizard";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-lizard",
-    templateUrl: "./logical-lizards.component.html",
-    styleUrls: ["./logical-lizards.component.scss"],
-    standalone: false
+  selector: "app-lizard",
+  templateUrl: "./logical-lizards.component.html",
+  styleUrls: ["./logical-lizards.component.scss"],
+  standalone: false,
 })
 export class LizardComponent implements OnInit {
-  @Input() public bot: LizardBot;
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
 
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
+  @Input() public bot: LizardBot;
 
   public buildings = [
     { suit: "fox", building: "garden" },

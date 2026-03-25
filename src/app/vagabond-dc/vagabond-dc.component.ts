@@ -1,15 +1,18 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
 import { VagaBotDC } from "../models/vagabond-dc";
 import { BotService } from "../bot.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-vagabond-dc",
-    templateUrl: "./vagabond-dc.component.html",
-    styleUrls: ["./vagabond-dc.component.scss"],
-    standalone: false
+  selector: "app-vagabond-dc",
+  templateUrl: "./vagabond-dc.component.html",
+  styleUrls: ["./vagabond-dc.component.scss"],
+  standalone: false,
 })
-export class VagabondDCComponent implements OnInit {
+export class VagabondDCComponent {
+  botService = inject(BotService);
+  translateService = inject(TranslateService);
+
   @Input() public bot: VagaBotDC;
 
   public get descriptions() {
@@ -34,13 +37,6 @@ export class VagabondDCComponent implements OnInit {
         return "You have too many, or not enough battle track items.";
     }
   }
-
-  constructor(
-    public botService: BotService,
-    public translateService: TranslateService,
-  ) {}
-
-  ngOnInit() {}
 
   changeVaga(newVaga) {
     this.bot.customData.chosenVaga = newVaga;
