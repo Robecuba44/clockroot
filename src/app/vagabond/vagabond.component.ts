@@ -1,12 +1,12 @@
-import { Component, Input, inject } from "@angular/core";
-import { VagaBot } from "../models/vagabond";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, Input, inject } from '@angular/core';
+import { VagaBot } from '../models/vagabond';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-vagabond",
-  templateUrl: "./vagabond.component.html",
-  styleUrls: ["./vagabond.component.scss"],
+  selector: 'app-vagabond',
+  templateUrl: './vagabond.component.html',
+  styleUrls: ['./vagabond.component.scss'],
   standalone: false,
 })
 export class VagabondComponent {
@@ -26,15 +26,15 @@ export class VagabondComponent {
 
     switch (total) {
       case 0:
-        return "BattleTrack0";
+        return 'BattleTrack0';
       case 1:
-        return "BattleTrack1";
+        return 'BattleTrack1';
       case 2:
-        return "BattleTrack2";
+        return 'BattleTrack2';
       case 3:
-        return "BattleTrack3";
+        return 'BattleTrack3';
       default:
-        return "You have too many, or not enough battle track items.";
+        return 'You have too many, or not enough battle track items.';
     }
   }
 

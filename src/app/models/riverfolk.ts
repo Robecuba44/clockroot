@@ -1,67 +1,67 @@
-import { TranslateService } from "@ngx-translate/core";
-import { Bot, BotName } from "./bot";
-import { NEVER } from "rxjs";
+import { TranslateService } from '@ngx-translate/core';
+import { Bot, BotName } from './bot';
+import { NEVER } from 'rxjs';
 
 export class RiverfolkBot extends Bot {
-  public name: BotName = "Riverfolk";
+  public name: BotName = 'Riverfolk';
 
-  public setupPosition = "G";
+  public setupPosition = 'G';
   public setupRules = [`Setup0`, `Setup1`, `Setup2`, `Setup3`, `Setup4`];
 
   public difficultyDescriptions = {
     Easy: `Easy`,
-    Normal: "Normal",
+    Normal: 'Normal',
     Challenging: `Challenging`,
     Nightmare: `Nightmare`,
   };
 
   public rules = [
     {
-      traitName: "Poor Manual Dexterity",
-      name: "RulePoorManualDexterity",
+      traitName: 'Poor Manual Dexterity',
+      name: 'RulePoorManualDexterity',
       text: `TextPoorManualDexterity`,
       isActive: true,
     },
     {
-      traitName: "Hates Surprises",
-      name: "RuleHatesSurprises",
-      text: "TextHatesSurprises",
+      traitName: 'Hates Surprises',
+      name: 'RuleHatesSurprises',
+      text: 'TextHatesSurprises',
       isActive: true,
     },
     {
-      traitName: "Market",
-      name: "RuleMarket",
-      text: "TextMarket",
+      traitName: 'Market',
+      name: 'RuleMarket',
+      text: 'TextMarket',
       isActive: true,
     },
     {
-      traitName: "Garrison",
-      name: "RuleGarrison",
-      text: "TextGarrison",
+      traitName: 'Garrison',
+      name: 'RuleGarrison',
+      text: 'TextGarrison',
       canToggle: true,
     },
     {
-      traitName: "Greedy",
-      name: "RuleGreedy",
-      text: "TextGreedy",
+      traitName: 'Greedy',
+      name: 'RuleGreedy',
+      text: 'TextGreedy',
       canToggle: true,
     },
     {
-      traitName: "Ferocious",
-      name: "RuleFerocious",
+      traitName: 'Ferocious',
+      name: 'RuleFerocious',
       text: `TextFerocious`,
       canToggle: true,
     },
     {
-      traitName: "Involved",
-      name: "RuleInvolved",
+      traitName: 'Involved',
+      name: 'RuleInvolved',
       text: `TextInvolved`,
       canToggle: true,
     },
   ];
   //Will need a check for protectionism to determine several key actions, will need a tracker for trade posts and services and payments? May be an annoying one but seems straight forward overall
   public customData = {
-    currentSuit: "bird",
+    currentSuit: 'bird',
 
     buildings: {
       fox: [],
@@ -77,18 +77,18 @@ export class RiverfolkBot extends Bot {
   public birdsong(translate: TranslateService) {
     return [
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificBirdsong.Riverfolk Robots.StockMarket`),
       ),
       this.createMetaData(
-        "score",
+        'score',
         1,
         translate.instant(`SpecificBirdsong.Riverfolk Robots.CraftOrder`),
       ),
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificBirdsong.Riverfolk Robots.SetOrder`),
       ),
     ];
@@ -97,18 +97,18 @@ export class RiverfolkBot extends Bot {
   public daylight(translate: TranslateService) {
     const suit = this.customData.currentSuit;
     const riverDifficulty =
-      this.difficulty === "Easy"
+      this.difficulty === 'Easy'
         ? 0
-        : this.difficulty === "Normal"
+        : this.difficulty === 'Normal'
           ? 1
-          : this.difficulty === "Challenging"
+          : this.difficulty === 'Challenging'
             ? 2
             : 2;
-    const checkBird = suit === "bird" ? true : false;
+    const checkBird = suit === 'bird' ? true : false;
     const base = [
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(
           `SpecificDaylight.Riverfolk Robots.BuildAndGarrison`,
           { riverDifficulty, suit },
@@ -118,22 +118,22 @@ export class RiverfolkBot extends Bot {
     base.push(
       checkBird
         ? this.createMetaData(
-            "text",
-            "",
+            'text',
+            '',
             translate.instant(
               `SpecificDaylight.Riverfolk Robots.RecruitOther`,
               { suit },
             ),
           )
         : this.createMetaData(
-            "text",
-            "",
+            'text',
+            '',
             translate.instant(`SpecificDaylight.Riverfolk Robots.RecruitBird`),
           ),
     );
     base.push(
       this.createMetaData(
-        "score",
+        'score',
         1,
         translate.instant(`SpecificDaylight.Riverfolk Robots.Organize`),
       ),
@@ -141,8 +141,8 @@ export class RiverfolkBot extends Bot {
     (this.customData.protectionismShield
       ? base.push(
           this.createMetaData(
-            "text",
-            "",
+            'text',
+            '',
             translate.instant(`SpecificDaylight.Riverfolk Robots.BattleShield`),
           ),
         )
@@ -150,8 +150,8 @@ export class RiverfolkBot extends Bot {
       this.customData.protectionismSword
         ? base.push(
             this.createMetaData(
-              "text",
-              "",
+              'text',
+              '',
               translate.instant(
                 `SpecificDaylight.Riverfolk Robots.BattleSword`,
                 { suit },
@@ -165,13 +165,13 @@ export class RiverfolkBot extends Bot {
   public evening(translate: TranslateService) {
     const eveningActions = [
       this.createMetaData(
-        "score",
+        'score',
         1,
         translate.instant(`SpecificEvening.Riverfolk Robots.Score`),
       ),
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificEvening.Riverfolk Robots.Discard`),
       ),
     ];
@@ -182,8 +182,8 @@ export class RiverfolkBot extends Bot {
     ) {
       eveningActions.push(
         this.createMetaData(
-          "text",
-          "",
+          'text',
+          '',
           translate.instant(`SpecificEvening.Riverfolk Robots.Racketeering`),
         ),
       );
@@ -191,19 +191,19 @@ export class RiverfolkBot extends Bot {
     if (this.customData.protectionismShield) {
       eveningActions.push(
         this.createMetaData(
-          "text",
-          "",
+          'text',
+          '',
           translate.instant(`SpecificEvening.Riverfolk Robots.DiscardShield`),
         ),
       );
     }
-    if (this.difficulty === "Nightmare") {
+    if (this.difficulty === 'Nightmare') {
       eveningActions.push(
         this.createMetaData(
-          "score",
+          'score',
           1,
           translate.instant(
-            "SpecificEvening.Electric Eyrie (DC).NightmareScore",
+            'SpecificEvening.Electric Eyrie (DC).NightmareScore',
           ),
         ),
       );
@@ -214,13 +214,13 @@ export class RiverfolkBot extends Bot {
   public services(translate: TranslateService) {
     const base = [
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.servicesBirdsong`),
       ),
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.servicesCost`) +
           translate.instant(
             `SpecificExtra.Riverfolk Robots.servicesVictoryPoints`,
@@ -229,22 +229,22 @@ export class RiverfolkBot extends Bot {
     ];
     base.push(
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.serviceBoat`),
       ),
     );
     base.push(
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.serviceCard`),
       ),
     );
     base.push(
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.serviceMerc`),
       ),
     );
@@ -253,8 +253,8 @@ export class RiverfolkBot extends Bot {
   public tradePost(translate: TranslateService) {
     return [
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificExtra.Riverfolk Robots.tradePost`),
       ),
     ];

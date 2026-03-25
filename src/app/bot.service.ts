@@ -1,24 +1,24 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable, inject } from '@angular/core';
 
-import { Bot, Difficulty, Rule, Item, BotName } from "./models/bot";
-import { MarquiseBot } from "./models/marquise";
-import { EyrieBot } from "./models/eyrie";
-import { MarquiseBotDC } from "./models/marquise-dc";
-import { EyrieBotDC } from "./models/eyrie-dc";
-import { WoodlandBotDC } from "./models/woodland-dc";
-import { VagaBotDC } from "./models/vagabond-dc";
-import { WoodlandBot } from "./models/woodland";
-import { VagaBot } from "./models/vagabond";
-import { DuchyBot } from "./models/duchy";
-import { LizardBot } from "./models/lizard";
-import { CorvidBot } from "./models/corvid";
-import { RiverfolkBot } from "./models/riverfolk";
-import { LegionBot } from "./models/legion";
-import { AlertController, ModalController } from "@ionic/angular";
-import { PriorityModalComponent } from "./priority-modal/priority-modal.component";
+import { Bot, Difficulty, Rule, Item, BotName } from './models/bot';
+import { MarquiseBot } from './models/marquise';
+import { EyrieBot } from './models/eyrie';
+import { MarquiseBotDC } from './models/marquise-dc';
+import { EyrieBotDC } from './models/eyrie-dc';
+import { WoodlandBotDC } from './models/woodland-dc';
+import { VagaBotDC } from './models/vagabond-dc';
+import { WoodlandBot } from './models/woodland';
+import { VagaBot } from './models/vagabond';
+import { DuchyBot } from './models/duchy';
+import { LizardBot } from './models/lizard';
+import { CorvidBot } from './models/corvid';
+import { RiverfolkBot } from './models/riverfolk';
+import { LegionBot } from './models/legion';
+import { AlertController, ModalController } from '@ionic/angular';
+import { PriorityModalComponent } from './priority-modal/priority-modal.component';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class BotService {
   private modalCtrl = inject(ModalController);
@@ -44,94 +44,94 @@ export class BotService {
 
   public botMeta: Record<BotName, { icon: string; fullName: string }> = {
     Marquise: {
-      icon: "marquise",
-      fullName: "Mechanical Marquise",
+      icon: 'marquise',
+      fullName: 'Mechanical Marquise',
     },
     Eyrie: {
-      icon: "eyrie",
-      fullName: "Electric Eyrie",
+      icon: 'eyrie',
+      fullName: 'Electric Eyrie',
     },
     Woodland: {
-      icon: "woodland",
-      fullName: "Automated Alliance",
+      icon: 'woodland',
+      fullName: 'Automated Alliance',
     },
     Vagabond: {
-      icon: "vagabond",
-      fullName: "Vagabot",
+      icon: 'vagabond',
+      fullName: 'Vagabot',
     },
     MarquiseDC: {
-      icon: "marquise",
-      fullName: "Mechanical Marquise (DC)",
+      icon: 'marquise',
+      fullName: 'Mechanical Marquise (DC)',
     },
     EyrieDC: {
-      icon: "eyrie",
-      fullName: "Electric Eyrie (DC)",
+      icon: 'eyrie',
+      fullName: 'Electric Eyrie (DC)',
     },
     WoodlandDC: {
-      icon: "woodland",
-      fullName: "Automated Alliance (DC)",
+      icon: 'woodland',
+      fullName: 'Automated Alliance (DC)',
     },
     VagabondDC: {
-      icon: "vagabond",
-      fullName: "Vagabot (DC)",
+      icon: 'vagabond',
+      fullName: 'Vagabot (DC)',
     },
     Duchy: {
-      icon: "duchy",
-      fullName: "Drillbit Duchy",
+      icon: 'duchy',
+      fullName: 'Drillbit Duchy',
     },
     Lizard: {
-      icon: "lizard",
-      fullName: "Logical Lizards",
+      icon: 'lizard',
+      fullName: 'Logical Lizards',
     },
     Corvid: {
-      icon: "corvid",
-      fullName: "Cogwheel Corvids",
+      icon: 'corvid',
+      fullName: 'Cogwheel Corvids',
     },
     Riverfolk: {
-      icon: "riverfolk",
-      fullName: "Riverfolk Robots",
+      icon: 'riverfolk',
+      fullName: 'Riverfolk Robots',
     },
     Legion: {
-      icon: "legion",
-      fullName: "Looting Legion",
+      icon: 'legion',
+      fullName: 'Looting Legion',
     },
   };
 
   public itemImages: Record<Item, string> = {
-    Sack: "sack",
-    Sack2: "sack",
-    Sack3: "sack",
-    Sack4: "sack",
-    Boot: "boot",
-    Boot2: "boot",
-    Boot3: "boot",
-    Boot4: "boot",
-    Boot5: "boot",
-    Boot6: "boot",
-    Boot7: "boot",
-    Sword: "sword",
-    Sword2: "sword",
-    Sword3: "sword",
-    Sword4: "sword",
-    Sword5: "sword",
-    Sword6: "sword",
-    Sword7: "sword",
-    Tea: "tea",
-    Tea2: "tea",
-    Tea3: "tea",
-    Coin: "coin",
-    Coin2: "coin",
-    Coin3: "coin",
-    Crossbow: "crossbow",
-    Crossbow2: "crossbow",
-    Crossbow3: "crossbow",
-    Hammer: "hammer",
-    Hammer2: "hammer",
-    Hammer3: "hammer",
-    Hammer4: "hammer",
-    Torch: "torch",
-    Torch2: "torch",
-    Torch3: "torch",
+    Sack: 'sack',
+    Sack2: 'sack',
+    Sack3: 'sack',
+    Sack4: 'sack',
+    Boot: 'boot',
+    Boot2: 'boot',
+    Boot3: 'boot',
+    Boot4: 'boot',
+    Boot5: 'boot',
+    Boot6: 'boot',
+    Boot7: 'boot',
+    Sword: 'sword',
+    Sword2: 'sword',
+    Sword3: 'sword',
+    Sword4: 'sword',
+    Sword5: 'sword',
+    Sword6: 'sword',
+    Sword7: 'sword',
+    Tea: 'tea',
+    Tea2: 'tea',
+    Tea3: 'tea',
+    Coin: 'coin',
+    Coin2: 'coin',
+    Coin3: 'coin',
+    Crossbow: 'crossbow',
+    Crossbow2: 'crossbow',
+    Crossbow3: 'crossbow',
+    Hammer: 'hammer',
+    Hammer2: 'hammer',
+    Hammer3: 'hammer',
+    Hammer4: 'hammer',
+    Torch: 'torch',
+    Torch2: 'torch',
+    Torch3: 'torch',
   };
 
   private getRandomIntInclusive(min: number, max: number) {
@@ -158,11 +158,11 @@ export class BotService {
   // For referencing the names in the URL ctrl+f for 'public name: BotName = '
   private checkUrlForBots() {
     const params = new URLSearchParams(window.location.search);
-    const botsParam = params.get("bots");
+    const botsParam = params.get('bots');
 
     if (botsParam) {
       this.clearBots();
-      const botNames = botsParam.split(",") as BotName[];
+      const botNames = botsParam.split(',') as BotName[];
       botNames.forEach((name) => {
         if (this.botHash[name]) {
           const newBot = new (this.botHash[name] as new () => Bot)();
@@ -182,10 +182,10 @@ export class BotService {
 
   public difficultyRandom() {
     const difficulties: Difficulty[] = [
-      "Easy",
-      "Normal",
-      "Challenging",
-      "Nightmare",
+      'Easy',
+      'Normal',
+      'Challenging',
+      'Nightmare',
     ];
 
     this.bots.forEach((bot) => {
@@ -225,15 +225,15 @@ export class BotService {
     const alert = await this.alertCtrl.create({
       header: `Remove the ${bot.name} bot?`,
       message:
-        "This will remove all rules, victory points, traits, and any other settings you have set for this bot.",
+        'This will remove all rules, victory points, traits, and any other settings you have set for this bot.',
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
-          cssClass: "secondary",
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
         },
         {
-          text: "Yes, remove!",
+          text: 'Yes, remove!',
           handler: () => {
             this.bots = this.bots.filter((x) => x !== bot);
             this.saveBots();
@@ -268,7 +268,12 @@ export class BotService {
   }
 
   public changeDifficulty(bot: Bot, difficulty: Difficulty | string) {
-    const allowed: Difficulty[] = ["Easy", "Normal", "Challenging", "Nightmare"];
+    const allowed: Difficulty[] = [
+      'Easy',
+      'Normal',
+      'Challenging',
+      'Nightmare',
+    ];
     if (!allowed.includes(difficulty as Difficulty)) {
       return;
     }
@@ -285,11 +290,11 @@ export class BotService {
     bot.items[item] = !bot.items[item];
 
     // exceptions
-    if (bot.items[item] && bot.name === "Vagabond") {
+    if (bot.items[item] && bot.name === 'Vagabond') {
       (bot as VagaBot).customData.satchelItems[item] = 0;
     }
 
-    if (bot.items[item] && bot.name === "VagabondDC") {
+    if (bot.items[item] && bot.name === 'VagabondDC') {
       (bot as VagaBotDC).customData.satchelItems[item] = 0;
     }
 
@@ -313,11 +318,11 @@ export class BotService {
   }
 
   public saveBots() {
-    localStorage.setItem("bots", JSON.stringify(this.bots));
+    localStorage.setItem('bots', JSON.stringify(this.bots));
   }
 
   private loadBots() {
-    const loadedBots = localStorage.getItem("bots") || "[]";
+    const loadedBots = localStorage.getItem('bots') || '[]';
     const parsedBots = JSON.parse(loadedBots);
 
     this.bots = [];

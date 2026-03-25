@@ -1,9 +1,9 @@
-import { Component, Input, inject } from "@angular/core";
-import { Bot } from "../models/bot";
-import { BotService } from "../bot.service";
-import { RendererService } from "../renderer.service";
-import { TranslateService } from "@ngx-translate/core";
-import { ToastController } from "@ionic/angular";
+import { Component, Input, inject } from '@angular/core';
+import { Bot } from '../models/bot';
+import { BotService } from '../bot.service';
+import { RendererService } from '../renderer.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastController } from '@ionic/angular';
 
 export interface MetaData {
   text: string;
@@ -12,9 +12,9 @@ export interface MetaData {
 }
 
 @Component({
-  selector: "para",
-  templateUrl: "./paragraph.component.html",
-  styleUrls: ["./paragraph.component.scss"],
+  selector: 'para',
+  templateUrl: './paragraph.component.html',
+  styleUrls: ['./paragraph.component.scss'],
   standalone: false,
 })
 export class ParagraphComponent {
@@ -30,19 +30,19 @@ export class ParagraphComponent {
     this.bot.addVP(score);
     const botname = this.botService.botMeta[this.bot.name].fullName;
     const translatedBotName = this.translateService.instant(
-      "Factions." + botname,
+      'Factions.' + botname,
     );
 
     const toast = await this.toastController.create({
-      message: this.translateService.instant("ToastMessages.UpdateScore", {
+      message: this.translateService.instant('ToastMessages.UpdateScore', {
         botname: translatedBotName,
         addend: score,
       }),
       duration: 3000,
-      position: "bottom",
+      position: 'bottom',
       buttons: [
         {
-          text: this.translateService.instant("ToastMessages.Actions.Undo"),
+          text: this.translateService.instant('ToastMessages.Actions.Undo'),
           handler: () => {
             this.bot.addVP(-score);
           },
@@ -53,7 +53,7 @@ export class ParagraphComponent {
   }
 
   public getScoreValue(): number {
-    if (typeof this.metadata.value === "number") {
+    if (typeof this.metadata.value === 'number') {
       return this.metadata.value;
     }
 

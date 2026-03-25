@@ -40,7 +40,6 @@ ion-toolbar {
     margin: auto;
     margin-bottom: 1em;
   }
-  
 }
 
 .plot-storage {
@@ -54,14 +53,13 @@ ion-toolbar {
       display: grid;
       padding: 2em;
       grid-template-columns: 5em 5em 5em 5em;
-      gap: .5em;
+      gap: 0.5em;
       justify-content: center;
       .row-additions {
         grid-column: 1/-1;
         justify-content: center;
-        margin-top: .5em;
+        margin-top: 0.5em;
       }
-
     }
   }
 }
@@ -108,7 +106,7 @@ ion-toolbar {
 .row-additions {
   display: flex;
   align-items: center;
-  padding-left: .2em;
+  padding-left: 0.2em;
   gap: 1em;
 }
 

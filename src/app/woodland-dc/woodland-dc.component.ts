@@ -1,12 +1,12 @@
-import { Component, Input, inject } from "@angular/core";
-import { WoodlandBotDC } from "../models/woodland-dc";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, Input, inject } from '@angular/core';
+import { WoodlandBotDC } from '../models/woodland-dc';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-woodland-dc",
-  templateUrl: "./woodland-dc.component.html",
-  styleUrls: ["./woodland-dc.component.scss"],
+  selector: 'app-woodland-dc',
+  templateUrl: './woodland-dc.component.html',
+  styleUrls: ['./woodland-dc.component.scss'],
   standalone: false,
 })
 export class WoodlandDCComponent {

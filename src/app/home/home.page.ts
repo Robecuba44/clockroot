@@ -1,13 +1,13 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject } from '@angular/core';
 
-import { AlertController, PopoverController } from "@ionic/angular";
-import { FactionMenuComponent } from "../faction-menu/faction-menu.component";
-import { BotService } from "../bot.service";
+import { AlertController, PopoverController } from '@ionic/angular';
+import { FactionMenuComponent } from '../faction-menu/faction-menu.component';
+import { BotService } from '../bot.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "home.page.html",
-  styleUrls: ["home.page.scss"],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
   standalone: false,
 })
 export class HomePage {
@@ -20,7 +20,7 @@ export class HomePage {
       component: FactionMenuComponent,
       event: ev,
       translucent: true,
-      cssClass: "wider",
+      cssClass: 'wider',
     });
 
     popover.onDidDismiss().then((res) => {
@@ -36,17 +36,17 @@ export class HomePage {
 
   public async reset() {
     const alert = await this.alertCtrl.create({
-      header: "Reset Your Bots?",
+      header: 'Reset Your Bots?',
       message:
-        "This will reset all rules, victory points, traits, and any other settings you have set.",
+        'This will reset all rules, victory points, traits, and any other settings you have set.',
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
-          cssClass: "secondary",
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
         },
         {
-          text: "Yes, reset!",
+          text: 'Yes, reset!',
           handler: () => {
             this.botService.clearBots();
           },

@@ -1,11 +1,11 @@
-import { Component, Input, inject } from "@angular/core";
-import { Bot, Item } from "../models/bot";
-import { BotService } from "../bot.service";
+import { Component, Input, inject } from '@angular/core';
+import { Bot, Item } from '../models/bot';
+import { BotService } from '../bot.service';
 
 @Component({
-  selector: "app-bot-resources",
-  templateUrl: "./bot-resources.component.html",
-  styleUrls: ["./bot-resources.component.scss"],
+  selector: 'app-bot-resources',
+  templateUrl: './bot-resources.component.html',
+  styleUrls: ['./bot-resources.component.scss'],
   standalone: false,
 })
 export class BotResourcesComponent {
@@ -23,18 +23,18 @@ export class BotResourcesComponent {
   }
 
   public defaultItemOrder: Item[] = [
-    "Sack",
-    "Sack2",
-    "Boot",
-    "Boot2",
-    "Sword",
-    "Sword2",
-    "Tea",
-    "Tea2",
-    "Coin",
-    "Coin2",
-    "Crossbow",
-    "Hammer",
+    'Sack',
+    'Sack2',
+    'Boot',
+    'Boot2',
+    'Sword',
+    'Sword2',
+    'Tea',
+    'Tea2',
+    'Coin',
+    'Coin2',
+    'Crossbow',
+    'Hammer',
   ];
 
   public vagaItemOrder: Item[] = Object.keys(this.itemImages) as Item[];

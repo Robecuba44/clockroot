@@ -2,10 +2,10 @@
   <ion-title>
     <span id="VagabondDC">
       <span class="ion-hide-sm-down">{{
-        "Factions.Vagabot (DC)" | translate
+        'Factions.Vagabot (DC)' | translate
       }}</span>
       <span class="ion-hide-md-up">{{
-        "FactionsShort.Vagabot (DC)" | translate
+        'FactionsShort.Vagabot (DC)' | translate
       }}</span>
     </span>
   </ion-title>
@@ -13,26 +13,24 @@
   <ion-buttons slot="end">
     @if (!bot.setupHidden) {
       <ng-container>
-<ion-button
-     
-      (click)="botService.toggleSetup(bot)"
-      [disabled]="!bot.customData.chosenVaga"
-    >
-      <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
-    </ion-button>
+        <ion-button
+          (click)="botService.toggleSetup(bot)"
+          [disabled]="!bot.customData.chosenVaga"
+        >
+          <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+        </ion-button>
       </ng-container>
-}
+    }
     @if (bot.setupHidden) {
       <ng-container>
-<ion-button
-     
-      (click)="botService.toggleSetup(bot)"
-      [disabled]="!bot.customData.chosenVaga"
-    >
-      <ion-icon slot="icon-only" name="radio-button-off"></ion-icon>
-    </ion-button>
+        <ion-button
+          (click)="botService.toggleSetup(bot)"
+          [disabled]="!bot.customData.chosenVaga"
+        >
+          <ion-icon slot="icon-only" name="radio-button-off"></ion-icon>
+        </ion-button>
       </ng-container>
-}
+    }
     <ion-button (click)="botService.removeBot(bot)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
@@ -41,384 +39,384 @@
 
 <ion-list lines="none" class="no-pointer">
   @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.Setup" | translate }} ({{ bot.setupPosition }})</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          <li>
-            <a (click)="botService.showPriorities()">{{
-              "BotSetup.PriorityMarkers" | translate
-            }}</a>
-          </li>
-          @for (rule of bot.setupRules; track rule) {
-<li
-           
-            [innerHTML]="
-              'SpecificSetup.Vagabot (DC).' + rule | translate | format
-            "
-          ></li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
-
-  @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.ChooseVagabot" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            @for (vaga of ['Ranger', 'Thief', 'Tinker']; track vaga) {
-<ion-item>
-              <ion-radio
-                slot="start"
-                [value]="vaga"
-                (click)="changeVaga(vaga)"
-              ></ion-radio>
-
-              <ion-label class="ion-text-wrap">
-                <h2>
-                  {{ "SpecificExtra.Vagabot (DC).Name" + vaga | translate }}
-                </h2>
-                <p [innerHTML]="descriptions[vaga] | translate | format"></p>
-              </ion-label>
-              </ion-item>
-}
-          </ion-radio-group>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
-
-  @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.ChooseDifficulty" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            @for (
-                diff of ['Easy', 'Normal', 'Challenging', 'Nightmare']
-              ; track 
-                diff) {
-<ion-item
-             
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2
+              >{{ 'BotSetup.Setup' | translate }} ({{ bot.setupPosition }})</h2
             >
-              <ion-radio
-                slot="start"
-                [value]="diff"
-                (click)="botService.changeDifficulty(bot, diff)"
-              ></ion-radio>
-
-              <ion-label class="ion-text-wrap">
-                <h2>{{ "BotSetup.DifficultyDC." + diff | translate }}</h2>
-                <p
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              <li>
+                <a (click)="botService.showPriorities()">{{
+                  'BotSetup.PriorityMarkers' | translate
+                }}</a>
+              </li>
+              @for (rule of bot.setupRules; track rule) {
+                <li
                   [innerHTML]="
-                    'SpecificDifficulty.Vagabot (DC).' + diff
-                      | translate
-                      | format
+                    'SpecificSetup.Vagabot (DC).' + rule | translate | format
                   "
-                ></p>
-              </ion-label>
-              </ion-item>
-}
-          </ion-radio-group>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+                ></li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.ChooseTraits" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          @for (rule of bot.rules; track rule) {
-<ion-item>
-            <ion-checkbox
-              slot="start"
-              [disabled]="!rule.canToggle"
-              (click)="botService.toggleRule(rule)"
-              [checked]="rule.isActive"
-            ></ion-checkbox>
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'BotSetup.ChooseVagabot' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-radio-group>
+                @for (vaga of ['Ranger', 'Thief', 'Tinker']; track vaga) {
+                  <ion-item>
+                    <ion-radio
+                      slot="start"
+                      [value]="vaga"
+                      (click)="changeVaga(vaga)"
+                    ></ion-radio>
 
-            <ion-label class="ion-text-wrap">
-              <h2>{{ "SpecificRules." + rule.name | translate }}</h2>
-              <p
-                [innerHTML]="'SpecificRules.' + rule.text | translate | format"
-              ></p>
-            </ion-label>
-            </ion-item>
-}
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+                    <ion-label class="ion-text-wrap">
+                      <h2>
+                        {{
+                          'SpecificExtra.Vagabot (DC).Name' + vaga | translate
+                        }}
+                      </h2>
+                      <p
+                        [innerHTML]="descriptions[vaga] | translate | format"
+                      ></p>
+                    </ion-label>
+                  </ion-item>
+                }
+              </ion-radio-group>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
+
+  @if (!bot.setupHidden) {
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'BotSetup.ChooseDifficulty' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-radio-group>
+                @for (
+                  diff of ['Easy', 'Normal', 'Challenging', 'Nightmare'];
+                  track diff
+                ) {
+                  <ion-item>
+                    <ion-radio
+                      slot="start"
+                      [value]="diff"
+                      (click)="botService.changeDifficulty(bot, diff)"
+                    ></ion-radio>
+
+                    <ion-label class="ion-text-wrap">
+                      <h2>{{ 'BotSetup.DifficultyDC.' + diff | translate }}</h2>
+                      <p
+                        [innerHTML]="
+                          'SpecificDifficulty.Vagabot (DC).' + diff
+                            | translate
+                            | format
+                        "
+                      ></p>
+                    </ion-label>
+                  </ion-item>
+                }
+              </ion-radio-group>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
+
+  @if (!bot.setupHidden) {
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'BotSetup.ChooseTraits' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              @for (rule of bot.rules; track rule) {
+                <ion-item>
+                  <ion-checkbox
+                    slot="start"
+                    [disabled]="!rule.canToggle"
+                    (click)="botService.toggleRule(rule)"
+                    [checked]="rule.isActive"
+                  ></ion-checkbox>
+
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{ 'SpecificRules.' + rule.name | translate }}</h2>
+                    <p
+                      [innerHTML]="
+                        'SpecificRules.' + rule.text | translate | format
+                      "
+                    ></p>
+                  </ion-label>
+                </ion-item>
+              }
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.VagabotDifficultyTrait" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label class="ion-text-wrap">
-              <h2>
-                {{
-                  "SpecificExtra.Vagabot (DC).Name" + bot.customData.chosenVaga
-                    | translate
-                }}
-              </h2>
-              <p
-                [innerHTML]="
-                  descriptions[bot.customData.chosenVaga] | translate | format
-                "
-              ></p>
-            </ion-label>
-          </ion-item>
-          @if (bot.difficulty !== 'Normal') {
-  <ng-container>
-    <ion-item>
-            <ion-label class="ion-text-wrap">
-              <h2>
-                {{ "BotSetup.DifficultyText" | translate }}:
-                {{ bot.difficulty }}
-              </h2>
-              <p
-                [innerHTML]="
-                  'SpecificDifficulty.Vagabot (DC).' + bot.difficulty
-                    | translate
-                    | format
-                "
-              ></p>
-            </ion-label>
-            </ion-item>
-          </ng-container>
-}
-          @for (rule of bot.rules; track rule) {
-<ion-item
-           
-            [class.ion-hide]="rule.canToggle && !rule.isActive"
-          >
-            <ion-label class="ion-text-wrap">
-              <h2>{{ "SpecificRules." + rule.name | translate }}</h2>
-              <p
-                [innerHTML]="'SpecificRules.' + rule.text | translate | format"
-              ></p>
-            </ion-label>
-            </ion-item>
-}
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.VagabotDifficultyTrait' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label class="ion-text-wrap">
+                  <h2>
+                    {{
+                      'SpecificExtra.Vagabot (DC).Name' +
+                        bot.customData.chosenVaga | translate
+                    }}
+                  </h2>
+                  <p
+                    [innerHTML]="
+                      descriptions[bot.customData.chosenVaga]
+                        | translate
+                        | format
+                    "
+                  ></p>
+                </ion-label>
+              </ion-item>
+              @if (bot.difficulty !== 'Normal') {
+                <ng-container>
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">
+                      <h2>
+                        {{ 'BotSetup.DifficultyText' | translate }}:
+                        {{ bot.difficulty }}
+                      </h2>
+                      <p
+                        [innerHTML]="
+                          'SpecificDifficulty.Vagabot (DC).' + bot.difficulty
+                            | translate
+                            | format
+                        "
+                      ></p>
+                    </ion-label>
+                  </ion-item>
+                </ng-container>
+              }
+              @for (rule of bot.rules; track rule) {
+                <ion-item [class.ion-hide]="rule.canToggle && !rule.isActive">
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{ 'SpecificRules.' + rule.name | translate }}</h2>
+                    <p
+                      [innerHTML]="
+                        'SpecificRules.' + rule.text | translate | format
+                      "
+                    ></p>
+                  </ion-label>
+                </ion-item>
+              }
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <app-bot-resources [bot]="bot" [isVaga]="true"></app-bot-resources>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <app-bot-resources [bot]="bot" [isVaga]="true"></app-bot-resources>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.SatchelBattleTrack" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="building-row wrap">
-          @for (item of bot.customData.satchelItems | keyvalue; track item) {
-<div
-            class="flip-container"
-           
-            (contextmenu)="removeSatchelItem($event, item.key)"
-          >
-            <div class="flip-icon">
-              <img
-                [src]="
-                  'assets/inicon/token-item-' +
-                  botService.itemImages[item.key] +
-                  '.png'
-                "
-                class="flip-back"
-                [class.transparent]="
-                  bot.customData.satchelItems[item.key] !== 1
-                "
-                (click)="toggleSatchelItem(item.key)"
-              />
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.SatchelBattleTrack' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="building-row wrap">
+              @for (
+                item of bot.customData.satchelItems | keyvalue;
+                track item
+              ) {
+                <div
+                  class="flip-container"
+                  (contextmenu)="removeSatchelItem($event, item.key)"
+                >
+                  <div class="flip-icon">
+                    <img
+                      [src]="
+                        'assets/inicon/token-item-' +
+                        botService.itemImages[item.key] +
+                        '.png'
+                      "
+                      class="flip-back"
+                      [class.transparent]="
+                        bot.customData.satchelItems[item.key] !== 1
+                      "
+                      (click)="toggleSatchelItem(item.key)"
+                    />
 
-              @if (bot.customData.satchelItems[item.key] === 0) {
-<div
-                class="flip-front"
-               
-                (click)="toggleSatchelItem(item.key)"
-              >
-                <div class="label">
-                  {{
-                    "SpecificExtra.Vagabot (DC).SatchelExhausted" | translate
-                  }}
-                </div>
-              </div>
-}
+                    @if (bot.customData.satchelItems[item.key] === 0) {
+                      <div
+                        class="flip-front"
+                        (click)="toggleSatchelItem(item.key)"
+                      >
+                        <div class="label">
+                          {{
+                            'SpecificExtra.Vagabot (DC).SatchelExhausted'
+                              | translate
+                          }}
+                        </div>
+                      </div>
+                    }
 
-              @if (bot.customData.satchelItems[item.key] === 2) {
-<div
-                class="flip-front damaged"
-               
-                (click)="toggleSatchelItem(item.key)"
-              >
-                <div class="label">
-                  {{ "SpecificExtra.Vagabot (DC).SatchelDamaged" | translate }}
-                </div>
-              </div>
-}
+                    @if (bot.customData.satchelItems[item.key] === 2) {
+                      <div
+                        class="flip-front damaged"
+                        (click)="toggleSatchelItem(item.key)"
+                      >
+                        <div class="label">
+                          {{
+                            'SpecificExtra.Vagabot (DC).SatchelDamaged'
+                              | translate
+                          }}
+                        </div>
+                      </div>
+                    }
 
-              @if (bot.customData.satchelItems[item.key] === 3) {
-<div
-                class="flip-front"
-               
-                (click)="toggleSatchelItem(item.key)"
-              >
-                <div class="label">
-                  {{
-                    "SpecificExtra.Vagabot (DC).SatchelBattleTrack" | translate
-                  }}
+                    @if (bot.customData.satchelItems[item.key] === 3) {
+                      <div
+                        class="flip-front"
+                        (click)="toggleSatchelItem(item.key)"
+                      >
+                        <div class="label">
+                          {{
+                            'SpecificExtra.Vagabot (DC).SatchelBattleTrack'
+                              | translate
+                          }}
+                        </div>
+                      </div>
+                    }
+                  </div>
                 </div>
-              </div>
-}
+              }
             </div>
-          </div>
-}
-        </div>
 
-        <div class="building-row battle-track">
-          {{ "Sections.BattleTrackBonus" | translate }}<br />{{
-            "SpecificExtra.Vagabot (DC)." + battleTrackBonus | translate
-          }}
-        </div>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+            <div class="building-row battle-track">
+              {{ 'Sections.BattleTrackBonus' | translate }}<br />{{
+                'SpecificExtra.Vagabot (DC).' + battleTrackBonus | translate
+              }}
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2 class="birdsong-has-buttons">
-          {{ "Sections.Birdsong" | translate }}
-          @for (suit of ['bird', 'fox', 'bunny', 'mouse']; track suit) {
-<ion-button
-            class="ion-margin-start"
-            (click)="changeSuit(suit)"
-            [class.transparent]="bot.customData.currentSuit !== suit"
-           
-          >
-            <img
-              class="click-icon"
-              slot="icon-only"
-              [src]="'assets/inicon/card-' + suit + '.png'"
-            />
-          </ion-button>
-}
-        </h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.birdsong(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2 class="birdsong-has-buttons">
+              {{ 'Sections.Birdsong' | translate }}
+              @for (suit of ['bird', 'fox', 'bunny', 'mouse']; track suit) {
+                <ion-button
+                  class="ion-margin-start"
+                  (click)="changeSuit(suit)"
+                  [class.transparent]="bot.customData.currentSuit !== suit"
+                >
+                  <img
+                    class="click-icon"
+                    slot="icon-only"
+                    [src]="'assets/inicon/card-' + suit + '.png'"
+                  />
+                </ion-button>
+              }
+            </h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.birdsong(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.Daylight" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.daylight(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.Daylight' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.daylight(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.Evening" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.evening(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.Evening' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.evening(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 </ion-list>

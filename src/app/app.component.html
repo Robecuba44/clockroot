@@ -4,7 +4,7 @@
       <ion-header>
         <ion-toolbar>
           <ion-title>
-            {{ "NavTitle" | translate }}
+            {{ 'NavTitle' | translate }}
           </ion-title>
         </ion-toolbar>
       </ion-header>
@@ -17,7 +17,7 @@
             target="_blank"
           >
             <div class="plug">
-              {{ "LederPlug" | translate }}
+              {{ 'LederPlug' | translate }}
             </div>
           </ion-item>
 
@@ -37,19 +37,19 @@
                   "
                 />
                 {{
-                  "Factions." + botService.botMeta[bot.name].fullName
+                  'Factions.' + botService.botMeta[bot.name].fullName
                     | translate
                 }}
                 @if (!bot.setupHidden) {
                   <em class="ion-margin-start"
-                    >({{ "NeedsSetup" | translate }})</em
+                    >({{ 'NeedsSetup' | translate }})</em
                   >
                 }
               </ion-item>
             }
             <ion-item (click)="botService.showPriorities()">
               <div class="inline-icon ion-margin-end"></div>
-              {{ "PriorityMaps" | translate }}
+              {{ 'PriorityMaps' | translate }}
             </ion-item>
           </ion-menu-toggle>
 
@@ -81,7 +81,7 @@
 
         <div class="inline-icon ion-margin-end"></div>
         <ion-title>
-          {{ "GlobalSettings" | translate }}
+          {{ 'GlobalSettings' | translate }}
         </ion-title>
 
         <ion-list class="preserve-padding ion-no-padding">

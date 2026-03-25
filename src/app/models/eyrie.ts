@@ -1,59 +1,59 @@
-import { TranslateService } from "@ngx-translate/core";
-import { Bot, BotName } from "./bot";
+import { TranslateService } from '@ngx-translate/core';
+import { Bot, BotName } from './bot';
 
 export class EyrieBot extends Bot {
-  public name: BotName = "Eyrie";
+  public name: BotName = 'Eyrie';
 
-  public setupPosition = "B";
+  public setupPosition = 'B';
   public setupRules = [`Setup0`, `Setup1`, `Setup3`];
 
   public difficultyDescriptions = {
     Easy: `Easy`,
-    Normal: "Normal",
+    Normal: 'Normal',
     Challenging: `Challenging`,
     Nightmare: `Nightmare`,
   };
 
   public rules = [
     {
-      traitName: "Poor Manual Dexterity",
-      name: "RulePoorManualDexterity",
+      traitName: 'Poor Manual Dexterity',
+      name: 'RulePoorManualDexterity',
       text: `TextPoorManualDexterity`,
       isActive: true,
     },
     {
-      traitName: "Hates Surprises",
-      name: "RuleHatesSurprises",
-      text: "TextHatesSurprises",
+      traitName: 'Hates Surprises',
+      name: 'RuleHatesSurprises',
+      text: 'TextHatesSurprises',
       isActive: true,
     },
     {
-      traitName: "Lords of the Forest",
-      name: "RuleLordsOfTheForest",
-      text: "TextLordsOfTheForest",
+      traitName: 'Lords of the Forest',
+      name: 'RuleLordsOfTheForest',
+      text: 'TextLordsOfTheForest',
       isActive: true,
     },
     {
-      traitName: "Nobility",
-      name: "RuleNobility",
-      text: "TextNobility",
+      traitName: 'Nobility',
+      name: 'RuleNobility',
+      text: 'TextNobility',
       canToggle: true,
     },
     {
-      traitName: "Relentless",
-      name: "RuleRelentless",
-      text: "TextRelentless",
+      traitName: 'Relentless',
+      name: 'RuleRelentless',
+      text: 'TextRelentless',
       canToggle: true,
     },
     {
-      traitName: "Swoop",
-      name: "RuleSwoop",
+      traitName: 'Swoop',
+      name: 'RuleSwoop',
       text: `TextSwoop`,
       canToggle: true,
     },
     {
-      traitName: "War Tax",
-      name: "RuleWarTax",
+      traitName: 'War Tax',
+      name: 'RuleWarTax',
       text: `TextWarTax`,
       canToggle: true,
     },
@@ -71,7 +71,7 @@ export class EyrieBot extends Bot {
   };
 
   public setup(): void {
-    this.customData.decree.bird = this.difficulty === "Easy" ? 1 : 2;
+    this.customData.decree.bird = this.difficulty === 'Easy' ? 1 : 2;
   }
 
   public birdsong(translate: TranslateService) {
@@ -79,18 +79,18 @@ export class EyrieBot extends Bot {
 
     const base = [
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificBirdsong.Electric Eyrie.RevealOrder`),
       ),
       this.createMetaData(
-        "score",
+        'score',
         1,
         translate.instant(`SpecificBirdsong.Electric Eyrie.CraftOrder`),
       ),
       this.createMetaData(
-        "text",
-        "",
+        'text',
+        '',
         translate.instant(`SpecificBirdsong.Electric Eyrie.DecreeOrder`),
       ),
     ];
@@ -98,8 +98,8 @@ export class EyrieBot extends Bot {
     if (newRoost) {
       base.push(
         this.createMetaData(
-          "text",
-          "",
+          'text',
+          '',
           translate.instant(`SpecificBirdsong.Electric Eyrie.NewRoost`),
         ),
       );
@@ -112,9 +112,9 @@ export class EyrieBot extends Bot {
     const actions = [];
 
     let mostVal = 0;
-    let mostSuit = "";
+    let mostSuit = '';
     let mostSuits = [];
-    ["fox", "mouse", "bunny", "bird"].forEach((suit) => {
+    ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
       if (this.customData.decree[suit] < mostVal) {
         return;
       }
@@ -134,12 +134,12 @@ export class EyrieBot extends Bot {
 
     // if we have a tie for the most, we don't have a most
     if (mostSuits.length > 1) {
-      mostSuit = "";
+      mostSuit = '';
       mostVal = 0;
     }
 
-    ["recruit", "move", "battle"].forEach((curAction) => {
-      ["fox", "mouse", "bunny", "bird"].forEach((suit) => {
+    ['recruit', 'move', 'battle'].forEach((curAction) => {
+      ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
         const totalForSuit = this.customData.decree[suit];
         if (totalForSuit === 0) {
           return;
@@ -148,18 +148,18 @@ export class EyrieBot extends Bot {
         const suitText = `**card:${suit}**`;
 
         switch (curAction) {
-          case "recruit": {
-            const recruitText = this.hasTrait("Nobility")
+          case 'recruit': {
+            const recruitText = this.hasTrait('Nobility')
               ? translate.instant(
-                  "SpecificDaylight.Electric Eyrie.ExtraRecruit",
+                  'SpecificDaylight.Electric Eyrie.ExtraRecruit',
                 )
-              : "";
+              : '';
 
             actions.push(
               this.createMetaData(
-                "text",
-                "",
-                translate.instant("SpecificDaylight.Electric Eyrie.Recruit", {
+                'text',
+                '',
+                translate.instant('SpecificDaylight.Electric Eyrie.Recruit', {
                   totalForSuit,
                   suitText,
                   recruitText,
@@ -169,12 +169,12 @@ export class EyrieBot extends Bot {
             break;
           }
 
-          case "move": {
+          case 'move': {
             actions.push(
               this.createMetaData(
-                "text",
-                "",
-                translate.instant("SpecificDaylight.Electric Eyrie.Move", {
+                'text',
+                '',
+                translate.instant('SpecificDaylight.Electric Eyrie.Move', {
                   totalForSuit,
                   suitText,
                 }),
@@ -183,18 +183,18 @@ export class EyrieBot extends Bot {
             break;
           }
 
-          case "battle": {
-            let extraHit = "";
+          case 'battle': {
+            let extraHit = '';
             if (suit === mostSuit) {
               extraHit = translate.instant(
-                "SpecificDaylight.Electric Eyrie.ExtraHit",
+                'SpecificDaylight.Electric Eyrie.ExtraHit',
               );
             }
             actions.push(
               this.createMetaData(
-                "text",
-                "",
-                translate.instant("SpecificDaylight.Electric Eyrie.Battle", {
+                'text',
+                '',
+                translate.instant('SpecificDaylight.Electric Eyrie.Battle', {
                   totalForSuit,
                   suitText,
                   extraHit,
@@ -210,37 +210,37 @@ export class EyrieBot extends Bot {
     if (actions.length === 0) {
       return [
         this.createMetaData(
-          "text",
-          "",
-          translate.instant("SpecificDaylight.Electric Eyrie.ExtraDecree"),
+          'text',
+          '',
+          translate.instant('SpecificDaylight.Electric Eyrie.ExtraDecree'),
         ),
       ];
     }
 
-    if (this.hasTrait("Relentless")) {
+    if (this.hasTrait('Relentless')) {
       actions.push(
         this.createMetaData(
-          "text",
-          "",
-          translate.instant("SpecificDaylight.Electric Eyrie.ExtraRelentless"),
+          'text',
+          '',
+          translate.instant('SpecificDaylight.Electric Eyrie.ExtraRelentless'),
         ),
       );
     }
 
     actions.push(
       this.createMetaData(
-        "text",
-        "",
-        translate.instant("SpecificDaylight.Electric Eyrie.ExtraBuild"),
+        'text',
+        '',
+        translate.instant('SpecificDaylight.Electric Eyrie.ExtraBuild'),
       ),
     );
 
-    if (this.hasTrait("Swoop")) {
+    if (this.hasTrait('Swoop')) {
       actions.push(
         this.createMetaData(
-          "text",
-          "",
-          translate.instant("SpecificDaylight.Electric Eyrie.ExtraSwoop"),
+          'text',
+          '',
+          translate.instant('SpecificDaylight.Electric Eyrie.ExtraSwoop'),
         ),
       );
     }
@@ -257,18 +257,18 @@ export class EyrieBot extends Bot {
 
     const base = [
       this.createMetaData(
-        "score",
+        'score',
         score,
-        translate.instant("SpecificEvening.Electric Eyrie.Score", { score }),
+        translate.instant('SpecificEvening.Electric Eyrie.Score', { score }),
       ),
     ];
 
-    if (this.difficulty === "Nightmare") {
+    if (this.difficulty === 'Nightmare') {
       base.push(
         this.createMetaData(
-          "score",
+          'score',
           1,
-          translate.instant("SpecificEvening.Electric Eyrie.NightmareScore"),
+          translate.instant('SpecificEvening.Electric Eyrie.NightmareScore'),
         ),
       );
     }
@@ -279,33 +279,33 @@ export class EyrieBot extends Bot {
   public turmoil(translate: TranslateService) {
     const base = [
       this.createMetaData(
-        "text",
-        "",
-        translate.instant("SpecificExtra.Electric Eyrie.Purge"),
+        'text',
+        '',
+        translate.instant('SpecificExtra.Electric Eyrie.Purge'),
       ),
       this.createMetaData(
-        "text",
-        "",
-        translate.instant("SpecificExtra.Electric Eyrie.Evening"),
+        'text',
+        '',
+        translate.instant('SpecificExtra.Electric Eyrie.Evening'),
       ),
     ];
 
     const score = this.customData.decree.bird;
 
-    if (this.hasTrait("Nobility")) {
+    if (this.hasTrait('Nobility')) {
       base.unshift(
         this.createMetaData(
-          "score",
+          'score',
           score,
-          translate.instant("SpecificExtra.Electric Eyrie.YesNobility"),
+          translate.instant('SpecificExtra.Electric Eyrie.YesNobility'),
         ),
       );
     } else {
       base.unshift(
         this.createMetaData(
-          "score",
+          'score',
           -score,
-          translate.instant("SpecificExtra.Electric Eyrie.NoNobility"),
+          translate.instant('SpecificExtra.Electric Eyrie.NoNobility'),
         ),
       );
     }

@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
-import { LizardBot } from "../models/lizard";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { LizardBot } from '../models/lizard';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-lizard",
-  templateUrl: "./logical-lizards.component.html",
-  styleUrls: ["./logical-lizards.component.scss"],
+  selector: 'app-lizard',
+  templateUrl: './logical-lizards.component.html',
+  styleUrls: ['./logical-lizards.component.scss'],
   standalone: false,
 })
 export class LizardComponent implements OnInit {
@@ -16,16 +16,16 @@ export class LizardComponent implements OnInit {
   @Input() public bot: LizardBot;
 
   public buildings = [
-    { suit: "fox", building: "garden" },
-    { suit: "bunny", building: "garden" },
-    { suit: "mouse", building: "garden" },
+    { suit: 'fox', building: 'garden' },
+    { suit: 'bunny', building: 'garden' },
+    { suit: 'mouse', building: 'garden' },
   ];
   public acolyteActions = [
-    "assets/inicon/token-convert.png",
-    "assets/inicon/token-crusade.png",
-    "assets/inicon/token-convert.png",
-    "assets/inicon/token-crusade.png",
-    "assets/inicon/token-sanctify.png",
+    'assets/inicon/token-convert.png',
+    'assets/inicon/token-crusade.png',
+    'assets/inicon/token-convert.png',
+    'assets/inicon/token-crusade.png',
+    'assets/inicon/token-sanctify.png',
   ];
 
   changeSuit(suit) {
@@ -33,7 +33,7 @@ export class LizardComponent implements OnInit {
     this.botService.saveBots();
   }
   ngOnInit() {
-    ["fox", "bunny", "mouse"].forEach((suit) => {
+    ['fox', 'bunny', 'mouse'].forEach((suit) => {
       this.bot.customData.buildings[suit] =
         this.bot.customData.buildings[suit] || [];
     });

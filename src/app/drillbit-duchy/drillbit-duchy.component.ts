@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
-import { DuchyBot } from "../models/duchy";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { DuchyBot } from '../models/duchy';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-duchy",
-  templateUrl: "./drillbit-duchy.component.html",
-  styleUrls: ["./drillbit-duchy.component.scss"],
+  selector: 'app-duchy',
+  templateUrl: './drillbit-duchy.component.html',
+  styleUrls: ['./drillbit-duchy.component.scss'],
   standalone: false,
 })
 export class DuchyComponent implements OnInit {
@@ -38,7 +38,7 @@ export class DuchyComponent implements OnInit {
   }
 
   // Toggles true/false for Citadels, Markets, and Tunnels
-  toggleTracker(type: "citadels" | "markets" | "tunnels", index: number) {
+  toggleTracker(type: 'citadels' | 'markets' | 'tunnels', index: number) {
     this.bot.customData[type][index] = !this.bot.customData[type][index];
     this.botService.saveBots();
   }

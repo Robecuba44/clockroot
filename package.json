@@ -9,7 +9,9 @@
     "start": "ng serve -o --port 9843",
     "build": "ng build --configuration production",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "private": true,
   "dependencies": {
@@ -49,6 +51,7 @@
     "@types/node": "^12.11.1",
     "angular-eslint": "21.3.1",
     "eslint": "^10.0.3",
+    "prettier": "^3.8.1",
     "ts-node": "~7.0.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "8.56.1"

@@ -1,8 +1,16 @@
 <div class="para">
-    <span class="para--text" [innerHTML]="rendererService.formatString(metadata.text)"></span>
-    @if ((metadata.type === 'score') && (getScoreValue() !== 0)) {
-      <ng-container>
-<ion-button class="para--button" (click)="updateScore(getScoreValue())" fill="outline">{{ (getScoreValue()<=0?"":"+") + getScoreValue() }}</ion-button>
-      </ng-container>
-}
+  <span
+    class="para--text"
+    [innerHTML]="rendererService.formatString(metadata.text)"
+  ></span>
+  @if (metadata.type === 'score' && getScoreValue() !== 0) {
+    <ng-container>
+      <ion-button
+        class="para--button"
+        (click)="updateScore(getScoreValue())"
+        fill="outline"
+        >{{ (getScoreValue() <= 0 ? '' : '+') + getScoreValue() }}</ion-button
+      >
+    </ng-container>
+  }
 </div>

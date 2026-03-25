@@ -2,10 +2,10 @@
   <ion-title>
     <span id="EyrieDC">
       <span class="ion-hide-sm-down">{{
-        "Factions.Electric Eyrie (DC)" | translate
+        'Factions.Electric Eyrie (DC)' | translate
       }}</span>
       <span class="ion-hide-md-up">{{
-        "FactionsShort.Electric Eyrie (DC)" | translate
+        'FactionsShort.Electric Eyrie (DC)' | translate
       }}</span>
     </span>
   </ion-title>
@@ -13,18 +13,18 @@
   <ion-buttons slot="end">
     @if (!bot.setupHidden) {
       <ng-container>
-<ion-button (click)="botService.toggleSetup(bot)">
-      <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
-    </ion-button>
+        <ion-button (click)="botService.toggleSetup(bot)">
+          <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+        </ion-button>
       </ng-container>
-}
+    }
     @if (bot.setupHidden) {
       <ng-container>
-<ion-button (click)="botService.toggleSetup(bot)">
-      <ion-icon slot="icon-only" name="radio-button-off"></ion-icon>
-    </ion-button>
+        <ion-button (click)="botService.toggleSetup(bot)">
+          <ion-icon slot="icon-only" name="radio-button-off"></ion-icon>
+        </ion-button>
       </ng-container>
-}
+    }
     <ion-button (click)="botService.removeBot(bot)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
@@ -33,333 +33,317 @@
 
 <ion-list lines="none" class="no-pointer">
   @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.Setup" | translate }} ({{ bot.setupPosition }})</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          <li>
-            <a (click)="botService.showPriorities()">{{
-              "BotSetup.PriorityMarkers" | translate
-            }}</a>
-          </li>
-          @for (rule of bot.setupRules; track rule) {
-<li
-           
-            [innerHTML]="
-              'SpecificSetup.Electric Eyrie (DC).' + rule | translate | format
-            "
-          ></li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
-
-  @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.ChooseDifficulty" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-radio-group>
-            @for (
-                diff of ['Easy', 'Normal', 'Challenging', 'Nightmare']
-              ; track 
-                diff) {
-<ion-item
-             
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2
+              >{{ 'BotSetup.Setup' | translate }} ({{ bot.setupPosition }})</h2
             >
-              <ion-radio
-                slot="start"
-                [value]="diff"
-                (click)="botService.changeDifficulty(bot, diff)"
-              ></ion-radio>
-
-              <ion-label class="ion-text-wrap">
-                <h2>{{ "BotSetup.DifficultyDC." + diff | translate }}</h2>
-                <p
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              <li>
+                <a (click)="botService.showPriorities()">{{
+                  'BotSetup.PriorityMarkers' | translate
+                }}</a>
+              </li>
+              @for (rule of bot.setupRules; track rule) {
+                <li
                   [innerHTML]="
-                    'SpecificDifficulty.Electric Eyrie (DC).' + diff
+                    'SpecificSetup.Electric Eyrie (DC).' + rule
                       | translate
                       | format
                   "
-                ></p>
-              </ion-label>
-              </ion-item>
-}
-          </ion-radio-group>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+                ></li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (!bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "BotSetup.ChooseTraits" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          @for (rule of bot.rules; track rule) {
-<ion-item>
-            <ion-checkbox
-              slot="start"
-              [disabled]="!rule.canToggle"
-              (click)="botService.toggleRule(rule)"
-              [checked]="rule.isActive"
-            ></ion-checkbox>
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'BotSetup.ChooseDifficulty' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-radio-group>
+                @for (
+                  diff of ['Easy', 'Normal', 'Challenging', 'Nightmare'];
+                  track diff
+                ) {
+                  <ion-item>
+                    <ion-radio
+                      slot="start"
+                      [value]="diff"
+                      (click)="botService.changeDifficulty(bot, diff)"
+                    ></ion-radio>
 
-            <ion-label class="ion-text-wrap">
-              <h2>{{ "SpecificRules." + rule.name | translate }}</h2>
-              <p
-                [innerHTML]="'SpecificRules.' + rule.text | translate | format"
-              ></p>
-            </ion-label>
-            </ion-item>
-}
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+                    <ion-label class="ion-text-wrap">
+                      <h2>{{ 'BotSetup.DifficultyDC.' + diff | translate }}</h2>
+                      <p
+                        [innerHTML]="
+                          'SpecificDifficulty.Electric Eyrie (DC).' + diff
+                            | translate
+                            | format
+                        "
+                      ></p>
+                    </ion-label>
+                  </ion-item>
+                }
+              </ion-radio-group>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
-  @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.DifficultyTraits" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          @if (bot.difficulty !== 'Normal') {
-  <ng-container>
-    <ion-item>
-            <ion-label class="ion-text-wrap">
-              <h2>
-                {{ "BotSetup.DifficultyText" | translate }}:
-                {{ "BotSetup.Difficulty." + bot.difficulty | translate }}
-              </h2>
-              <p
-                [innerHTML]="
-                  'SpecificDifficulty.Electric Eyrie (DC).' + bot.difficulty
-                    | translate
-                    | format
-                "
-              ></p>
-            </ion-label>
-            </ion-item>
-          </ng-container>
-}
-          @for (rule of bot.rules; track rule) {
-<ion-item
-           
-            [class.ion-hide]="rule.canToggle && !rule.isActive"
-          >
-            <ion-label class="ion-text-wrap">
-              <h2>{{ "SpecificRules." + rule.name | translate }}</h2>
-              <p
-                [innerHTML]="'SpecificRules.' + rule.text | translate | format"
-              ></p>
-            </ion-label>
-            </ion-item>
-}
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+  @if (!bot.setupHidden) {
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'BotSetup.ChooseTraits' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              @for (rule of bot.rules; track rule) {
+                <ion-item>
+                  <ion-checkbox
+                    slot="start"
+                    [disabled]="!rule.canToggle"
+                    (click)="botService.toggleRule(rule)"
+                    [checked]="rule.isActive"
+                  ></ion-checkbox>
+
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{ 'SpecificRules.' + rule.name | translate }}</h2>
+                    <p
+                      [innerHTML]="
+                        'SpecificRules.' + rule.text | translate | format
+                      "
+                    ></p>
+                  </ion-label>
+                </ion-item>
+              }
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <app-bot-resources [bot]="bot"></app-bot-resources>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.DifficultyTraits' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              @if (bot.difficulty !== 'Normal') {
+                <ng-container>
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">
+                      <h2>
+                        {{ 'BotSetup.DifficultyText' | translate }}:
+                        {{
+                          'BotSetup.Difficulty.' + bot.difficulty | translate
+                        }}
+                      </h2>
+                      <p
+                        [innerHTML]="
+                          'SpecificDifficulty.Electric Eyrie (DC).' +
+                            bot.difficulty
+                            | translate
+                            | format
+                        "
+                      ></p>
+                    </ion-label>
+                  </ion-item>
+                </ng-container>
+              }
+              @for (rule of bot.rules; track rule) {
+                <ion-item [class.ion-hide]="rule.canToggle && !rule.isActive">
+                  <ion-label class="ion-text-wrap">
+                    <h2>{{ 'SpecificRules.' + rule.name | translate }}</h2>
+                    <p
+                      [innerHTML]="
+                        'SpecificRules.' + rule.text | translate | format
+                      "
+                    ></p>
+                  </ion-label>
+                </ion-item>
+              }
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.DecreeRoosts" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        @for (suit of ['fox', 'mouse', 'bunny', 'bird']; track suit) {
-<div
-          class="decree-row"
-         
-        >
-          <div class="row-icon">
-            <img [src]="'assets/inicon/card-' + suit + '.png'" />
-          </div>
+    <ng-container>
+      <ion-item>
+        <app-bot-resources [bot]="bot"></app-bot-resources>
+      </ion-item>
+    </ng-container>
+  }
 
-          <div class="row-additions">
-            <ion-button
-              [disabled]="bot.customData.decree[suit] <= 0"
-              (click)="modifySuitCard(suit, -1)"
-            >
-              <ion-icon name="remove"></ion-icon>
-            </ion-button>
-            <span class="decree-count">{{ bot.customData.decree[suit] }}</span>
-            <ion-button (click)="modifySuitCard(suit, 1)">
-              <ion-icon name="add"></ion-icon>
-            </ion-button>
-          </div>
-        </div>
-}
+  @if (bot.setupHidden) {
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.DecreeRoosts' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            @for (suit of ['fox', 'mouse', 'bunny', 'bird']; track suit) {
+              <div class="decree-row">
+                <div class="row-icon">
+                  <img [src]="'assets/inicon/card-' + suit + '.png'" />
+                </div>
 
-        <div class="building-row">
-          @for (num of [0, 1, 2, 3, 4, 5, 6]; track num) {
-<div class="flip-container">
-            <div class="flip-icon">
-              <img
-                [src]="'assets/inicon/building-roost.png'"
-                class="flip-back"
-                [class.transparent]="bot.customData.buildings[num]"
-                (click)="toggleBuilding(num)"
-              />
-
-              @if (bot.customData.buildings[num]) {
-<div
-                class="flip-front"
-               
-                (click)="toggleBuilding(num)"
-              >
-                +{{ num }}
+                <div class="row-additions">
+                  <ion-button
+                    [disabled]="bot.customData.decree[suit] <= 0"
+                    (click)="modifySuitCard(suit, -1)"
+                  >
+                    <ion-icon name="remove"></ion-icon>
+                  </ion-button>
+                  <span class="decree-count">{{
+                    bot.customData.decree[suit]
+                  }}</span>
+                  <ion-button (click)="modifySuitCard(suit, 1)">
+                    <ion-icon name="add"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
-}
+            }
+
+            <div class="building-row">
+              @for (num of [0, 1, 2, 3, 4, 5, 6]; track num) {
+                <div class="flip-container">
+                  <div class="flip-icon">
+                    <img
+                      [src]="'assets/inicon/building-roost.png'"
+                      class="flip-back"
+                      [class.transparent]="bot.customData.buildings[num]"
+                      (click)="toggleBuilding(num)"
+                    />
+
+                    @if (bot.customData.buildings[num]) {
+                      <div class="flip-front" (click)="toggleBuilding(num)">
+                        +{{ num }}
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
             </div>
-          </div>
-}
-        </div>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>
-          {{ "Sections.Birdsong" | translate }}
-        </h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.birdsong(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>
+              {{ 'Sections.Birdsong' | translate }}
+            </h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.birdsong(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.Daylight" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.daylight(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.Daylight' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.daylight(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.Evening" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        <ol>
-          @for (message of bot.evening(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.Evening' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ol>
+              @for (message of bot.evening(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 
   @if (bot.setupHidden) {
-  <ng-container>
-    <ion-item>
-    <ion-card>
-      <ion-card-header>
-        <h2>{{ "Sections.Turmoil" | translate }}</h2>
-      </ion-card-header>
-      <ion-card-content>
-        @if (bot.hasTrait('Nobility')) {
-<em>{{
-          "BotSetup.TurmoilNobilityText" | translate
-        }}</em>
-}
-        @if (!bot.hasTrait('Nobility')) {
-<em>{{
-          "BotSetup.TurmoilText" | translate
-        }}</em>
-}
-        <ol>
-          @for (message of bot.turmoil(translateService); track message) {
-<li
-            class="rule-message"
-           
-          >
-            <para [bot]="bot" [metadata]="message"></para>
-          </li>
-}
-        </ol>
-      </ion-card-content>
-    </ion-card>
-    </ion-item>
-  </ng-container>
-}
+    <ng-container>
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            <h2>{{ 'Sections.Turmoil' | translate }}</h2>
+          </ion-card-header>
+          <ion-card-content>
+            @if (bot.hasTrait('Nobility')) {
+              <em>{{ 'BotSetup.TurmoilNobilityText' | translate }}</em>
+            }
+            @if (!bot.hasTrait('Nobility')) {
+              <em>{{ 'BotSetup.TurmoilText' | translate }}</em>
+            }
+            <ol>
+              @for (message of bot.turmoil(translateService); track message) {
+                <li class="rule-message">
+                  <para [bot]="bot" [metadata]="message"></para>
+                </li>
+              }
+            </ol>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ng-container>
+  }
 </ion-list>

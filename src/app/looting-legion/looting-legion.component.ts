@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
-import { LegionBot } from "../models/legion";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { LegionBot } from '../models/legion';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-legion",
-  templateUrl: "./looting-legion.component.html",
-  styleUrls: ["./looting-legion.component.scss"],
+  selector: 'app-legion',
+  templateUrl: './looting-legion.component.html',
+  styleUrls: ['./looting-legion.component.scss'],
   standalone: false,
 })
 export class LegionComponent implements OnInit {

@@ -2,21 +2,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { Bot, BotName } from './bot';
 
 export class EyrieBotDC extends Bot {
-
   public name: BotName = 'EyrieDC';
 
   public setupPosition = 'B';
-  public setupRules = [
-    `Setup0`,
-    `Setup1`,
-    `Setup3`
-  ];
+  public setupRules = [`Setup0`, `Setup1`, `Setup3`];
 
   public difficultyDescriptions = {
     Easy: `Easy`,
     Normal: 'Normal',
     Challenging: `Challenging`,
-    Nightmare: `Nightmare`
+    Nightmare: `Nightmare`,
   };
 
   public rules = [
@@ -24,43 +19,43 @@ export class EyrieBotDC extends Bot {
       traitName: 'Poor Manual Dexterity',
       name: 'RulePoorManualDexterity',
       text: `TextPoorManualDexterity`,
-      isActive: true
+      isActive: true,
     },
     {
       traitName: 'Hates Surprises',
       name: 'RuleHatesSurprises',
       text: 'TextHatesSurprises',
-      isActive: true
+      isActive: true,
     },
     {
       traitName: 'Lords of the Forest',
       name: 'RuleLordsOfTheForest',
       text: 'TextLordsOfTheForest',
-      isActive: true
+      isActive: true,
     },
     {
       traitName: 'Nobility',
       name: 'RuleNobility',
       text: 'TextNobility',
-      canToggle: true
+      canToggle: true,
     },
     {
       traitName: 'Relentless',
       name: 'RuleRelentless',
       text: 'TextRelentless',
-      canToggle: true
+      canToggle: true,
     },
     {
       traitName: 'Swoop',
       name: 'RuleSwoop',
       text: `TextSwoop`,
-      canToggle: true
+      canToggle: true,
     },
     {
       traitName: 'War Tax',
       name: 'RuleWarTax',
       text: `TextWarTax`,
-      canToggle: true
+      canToggle: true,
     },
   ];
 
@@ -69,27 +64,42 @@ export class EyrieBotDC extends Bot {
       fox: 0,
       mouse: 0,
       bunny: 0,
-      bird: 2
+      bird: 2,
     },
 
-    buildings: []
+    buildings: [],
   };
 
-  public setup(): void {
-  }
+  public setup(): void {}
 
   public birdsong(translate: TranslateService) {
     const newRoost = !this.customData.buildings.some(Boolean);
 
     const base = [
-      this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Electric Eyrie (DC).RevealOrder`)),
-      this.createMetaData('score', 1, translate.instant(`SpecificBirdsong.Electric Eyrie (DC).CraftOrder`)),
-      this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Electric Eyrie (DC).DecreeOrder`))
+      this.createMetaData(
+        'text',
+        '',
+        translate.instant(`SpecificBirdsong.Electric Eyrie (DC).RevealOrder`),
+      ),
+      this.createMetaData(
+        'score',
+        1,
+        translate.instant(`SpecificBirdsong.Electric Eyrie (DC).CraftOrder`),
+      ),
+      this.createMetaData(
+        'text',
+        '',
+        translate.instant(`SpecificBirdsong.Electric Eyrie (DC).DecreeOrder`),
+      ),
     ];
 
     if (newRoost) {
       base.push(
-        this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Electric Eyrie (DC).NewRoost`))
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant(`SpecificBirdsong.Electric Eyrie (DC).NewRoost`),
+        ),
       );
     }
 
@@ -102,8 +112,10 @@ export class EyrieBotDC extends Bot {
     let mostVal = 0;
     let mostSuit = '';
     let mostSuits = [];
-    ['fox', 'mouse', 'bunny', 'bird'].forEach(suit => {
-      if (this.customData.decree[suit] < mostVal) { return; }
+    ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
+      if (this.customData.decree[suit] < mostVal) {
+        return;
+      }
 
       // hold onto info if there is ever a tie
       if (this.customData.decree[suit] === mostVal) {
@@ -124,31 +136,47 @@ export class EyrieBotDC extends Bot {
       mostVal = 0;
     }
 
-    ['recruit', 'move', 'battle'].forEach(curAction => {
-      ['fox', 'mouse', 'bunny', 'bird'].forEach(suit => {
+    ['recruit', 'move', 'battle'].forEach((curAction) => {
+      ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
         const totalForSuit = this.customData.decree[suit];
-        if (totalForSuit === 0) { return; }
+        if (totalForSuit === 0) {
+          return;
+        }
 
         const suitText = `**card:${suit}**`;
 
         switch (curAction) {
           case 'recruit': {
-
             let recruitNum = totalForSuit;
             if (suit === 'bird' && this.difficulty !== 'Nightmare') {
-              if (this.difficulty === 'Easy') { recruitNum -= 1; }
-              if (this.difficulty === 'Challenging') { recruitNum += 1; }
+              if (this.difficulty === 'Easy') {
+                recruitNum -= 1;
+              }
+              if (this.difficulty === 'Challenging') {
+                recruitNum += 1;
+              }
             }
 
-            if (this.difficulty === 'Nightmare') { recruitNum += 1; }
+            if (this.difficulty === 'Nightmare') {
+              recruitNum += 1;
+            }
 
             const recruitText = this.hasTrait('Nobility')
-              ? translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraRecruit')
+              ? translate.instant(
+                  'SpecificDaylight.Electric Eyrie (DC).ExtraRecruit',
+                )
               : '';
 
             if (recruitNum > 0) {
               actions.push(
-                this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).Recruit', { recruitNum, suitText, recruitText }))
+                this.createMetaData(
+                  'text',
+                  '',
+                  translate.instant(
+                    'SpecificDaylight.Electric Eyrie (DC).Recruit',
+                    { recruitNum, suitText, recruitText },
+                  ),
+                ),
               );
             }
             break;
@@ -156,16 +184,34 @@ export class EyrieBotDC extends Bot {
 
           case 'move': {
             actions.push(
-              this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).Move', { totalForSuit, suitText }))
+              this.createMetaData(
+                'text',
+                '',
+                translate.instant('SpecificDaylight.Electric Eyrie (DC).Move', {
+                  totalForSuit,
+                  suitText,
+                }),
+              ),
             );
             break;
           }
 
           case 'battle': {
             let extraHit = '';
-            if (mostSuits.includes(suit)) { extraHit = translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraHit'); }
+            if (mostSuits.includes(suit)) {
+              extraHit = translate.instant(
+                'SpecificDaylight.Electric Eyrie (DC).ExtraHit',
+              );
+            }
             actions.push(
-              this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).Battle', { totalForSuit, suitText, extraHit }))
+              this.createMetaData(
+                'text',
+                '',
+                translate.instant(
+                  'SpecificDaylight.Electric Eyrie (DC).Battle',
+                  { totalForSuit, suitText, extraHit },
+                ),
+              ),
             );
             break;
           }
@@ -175,23 +221,41 @@ export class EyrieBotDC extends Bot {
 
     if (actions.length === 0) {
       return [
-        this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraDecree'))
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraDecree'),
+        ),
       ];
     }
 
     if (this.hasTrait('Relentless')) {
       actions.push(
-        this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraRelentless'))
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant(
+            'SpecificDaylight.Electric Eyrie (DC).ExtraRelentless',
+          ),
+        ),
       );
     }
 
     actions.push(
-      this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraBuild'))
+      this.createMetaData(
+        'text',
+        '',
+        translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraBuild'),
+      ),
     );
 
     if (this.hasTrait('Swoop')) {
       actions.push(
-        this.createMetaData('text', '', translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraSwoop'))
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant('SpecificDaylight.Electric Eyrie (DC).ExtraSwoop'),
+        ),
       );
     }
 
@@ -199,16 +263,31 @@ export class EyrieBotDC extends Bot {
   }
 
   public evening(translate: TranslateService) {
-
-    const score = Math.max(0, this.customData.buildings.reduce((prev, cur) => prev + (cur ? 1 : 0), 0) - 1);
+    const score = Math.max(
+      0,
+      this.customData.buildings.reduce((prev, cur) => prev + (cur ? 1 : 0), 0) -
+        1,
+    );
 
     const base = [
-      this.createMetaData('score', score, translate.instant('SpecificEvening.Electric Eyrie (DC).Score', { score }))
+      this.createMetaData(
+        'score',
+        score,
+        translate.instant('SpecificEvening.Electric Eyrie (DC).Score', {
+          score,
+        }),
+      ),
     ];
 
     if (this.difficulty === 'Nightmare') {
       base.push(
-        this.createMetaData('score', 1, translate.instant('SpecificEvening.Electric Eyrie (DC).NightmareScore'))
+        this.createMetaData(
+          'score',
+          1,
+          translate.instant(
+            'SpecificEvening.Electric Eyrie (DC).NightmareScore',
+          ),
+        ),
       );
     }
 
@@ -217,19 +296,35 @@ export class EyrieBotDC extends Bot {
 
   public turmoil(translate: TranslateService) {
     const base = [
-      this.createMetaData('text', '', translate.instant('SpecificExtra.Electric Eyrie (DC).Purge')),
-      this.createMetaData('text', '', translate.instant('SpecificExtra.Electric Eyrie (DC).Evening'))
+      this.createMetaData(
+        'text',
+        '',
+        translate.instant('SpecificExtra.Electric Eyrie (DC).Purge'),
+      ),
+      this.createMetaData(
+        'text',
+        '',
+        translate.instant('SpecificExtra.Electric Eyrie (DC).Evening'),
+      ),
     ];
 
-    const score = this.customData.decree.bird
+    const score = this.customData.decree.bird;
 
     if (this.hasTrait('Nobility')) {
       base.unshift(
-        this.createMetaData('score', score, translate.instant('SpecificExtra.Electric Eyrie (DC).YesNobility'))
+        this.createMetaData(
+          'score',
+          score,
+          translate.instant('SpecificExtra.Electric Eyrie (DC).YesNobility'),
+        ),
       );
     } else {
       base.unshift(
-        this.createMetaData('score', -score, translate.instant('SpecificExtra.Electric Eyrie (DC).NoNobility'))
+        this.createMetaData(
+          'score',
+          -score,
+          translate.instant('SpecificExtra.Electric Eyrie (DC).NoNobility'),
+        ),
       );
     }
 

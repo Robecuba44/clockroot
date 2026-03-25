@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
-import { RiverfolkBot } from "../models/riverfolk";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { RiverfolkBot } from '../models/riverfolk';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-riverfolk",
-  templateUrl: "./riverfolk-robots.component.html",
-  styleUrls: ["./riverfolk-robots.component.scss"],
+  selector: 'app-riverfolk',
+  templateUrl: './riverfolk-robots.component.html',
+  styleUrls: ['./riverfolk-robots.component.scss'],
   standalone: false,
 })
 export class RiverfolkComponent implements OnInit {
@@ -16,9 +16,9 @@ export class RiverfolkComponent implements OnInit {
   @Input() public bot: RiverfolkBot;
 
   public buildings = [
-    { suit: "fox", building: "tradingpost" },
-    { suit: "bunny", building: "tradingpost" },
-    { suit: "mouse", building: "tradingpost" },
+    { suit: 'fox', building: 'tradingpost' },
+    { suit: 'bunny', building: 'tradingpost' },
+    { suit: 'mouse', building: 'tradingpost' },
   ];
 
   changeSuit(suit) {
@@ -26,7 +26,7 @@ export class RiverfolkComponent implements OnInit {
     this.botService.saveBots();
   }
   ngOnInit() {
-    ["fox", "bunny", "mouse"].forEach((suit) => {
+    ['fox', 'bunny', 'mouse'].forEach((suit) => {
       this.bot.customData.buildings[suit] =
         this.bot.customData.buildings[suit] || [];
     });

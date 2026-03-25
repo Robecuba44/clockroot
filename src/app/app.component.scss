@@ -1,6 +1,4 @@
-
 .language {
-
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 
@@ -13,7 +11,6 @@
     max-width: 100%;
     padding-left: 32px;
   }
-
 }
 
 .plug {
@@ -27,15 +24,16 @@ ion-item.bot {
 }
 
 .call-to-action {
-    position:fixed;
-    bottom: 0;
-    min-width: 100%;
-    max-width: 100%;
-    left: 50%;
-    transform: translate(-50%, -10%);
+  position: fixed;
+  bottom: 0;
+  min-width: 100%;
+  max-width: 100%;
+  left: 50%;
+  transform: translate(-50%, -10%);
 }
 
-.difficulty, .traits {
+.difficulty,
+.traits {
   ion-label {
     padding-left: 32px;
   }

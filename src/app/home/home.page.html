@@ -22,57 +22,61 @@
 
 <ion-content>
   @if (botService.bots.length === 0) {
-<div class="blank-slate">
-    {{ 'AddBot' | translate }} <ion-button class="ion-margin-start" (click)="addBot($event)"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
-  </div>
-}
+    <div class="blank-slate">
+      {{ 'AddBot' | translate }}
+      <ion-button class="ion-margin-start" (click)="addBot($event)"
+        ><ion-icon slot="icon-only" name="add"></ion-icon
+      ></ion-button>
+    </div>
+  }
 
   <ion-list lines="none" class="ion-no-padding">
     @for (bot of botService.bots; track bot) {
-<ion-item> <!-- Possible reason the new factions are breaking the view width? -->
-      @if (bot.name === 'Marquise') {
-<app-marquise [bot]="bot"></app-marquise>
-}
-      @if (bot.name === 'Eyrie') {
-<app-eyrie [bot]="bot"></app-eyrie>
-}
-      @if (bot.name === 'Woodland') {
-<app-woodland [bot]="bot"></app-woodland>
-}
-      @if (bot.name === 'Vagabond') {
-<app-vagabond [bot]="bot"></app-vagabond>
-}
-      
-      @if (bot.name === 'MarquiseDC') {
-<app-marquise-dc [bot]="bot"></app-marquise-dc>
-}
-      @if (bot.name === 'EyrieDC') {
-<app-eyrie-dc [bot]="bot"></app-eyrie-dc>
-}
-      @if (bot.name === 'WoodlandDC') {
-<app-woodland-dc [bot]="bot"></app-woodland-dc>
-}
-      @if (bot.name === 'VagabondDC') {
-<app-vagabond-dc [bot]="bot"></app-vagabond-dc>
-}
+      <ion-item>
+        <!-- Possible reason the new factions are breaking the view width? -->
+        @if (bot.name === 'Marquise') {
+          <app-marquise [bot]="bot"></app-marquise>
+        }
+        @if (bot.name === 'Eyrie') {
+          <app-eyrie [bot]="bot"></app-eyrie>
+        }
+        @if (bot.name === 'Woodland') {
+          <app-woodland [bot]="bot"></app-woodland>
+        }
+        @if (bot.name === 'Vagabond') {
+          <app-vagabond [bot]="bot"></app-vagabond>
+        }
 
-      @if (bot.name === 'Duchy') {
-<app-duchy [bot]="bot"></app-duchy>
-}
-      @if (bot.name === 'Corvid') {
-<app-corvid [bot]="bot"></app-corvid>
-}
-      @if (bot.name === 'Lizard') {
-<app-lizard [bot]="bot"></app-lizard>
-}
-      @if (bot.name === 'Riverfolk') {
-<app-riverfolk [bot]="bot"></app-riverfolk>
-}
+        @if (bot.name === 'MarquiseDC') {
+          <app-marquise-dc [bot]="bot"></app-marquise-dc>
+        }
+        @if (bot.name === 'EyrieDC') {
+          <app-eyrie-dc [bot]="bot"></app-eyrie-dc>
+        }
+        @if (bot.name === 'WoodlandDC') {
+          <app-woodland-dc [bot]="bot"></app-woodland-dc>
+        }
+        @if (bot.name === 'VagabondDC') {
+          <app-vagabond-dc [bot]="bot"></app-vagabond-dc>
+        }
 
-      @if (bot.name === 'Legion') {
-<app-legion [bot]="bot"></app-legion>
-}
-    </ion-item>
-}
+        @if (bot.name === 'Duchy') {
+          <app-duchy [bot]="bot"></app-duchy>
+        }
+        @if (bot.name === 'Corvid') {
+          <app-corvid [bot]="bot"></app-corvid>
+        }
+        @if (bot.name === 'Lizard') {
+          <app-lizard [bot]="bot"></app-lizard>
+        }
+        @if (bot.name === 'Riverfolk') {
+          <app-riverfolk [bot]="bot"></app-riverfolk>
+        }
+
+        @if (bot.name === 'Legion') {
+          <app-legion [bot]="bot"></app-legion>
+        }
+      </ion-item>
+    }
   </ion-list>
 </ion-content>

@@ -1,10 +1,19 @@
-
 <ion-card>
-  <ion-card-header><h2>{{ 'Sections.VPItems' | translate }}</h2></ion-card-header>
+  <ion-card-header
+    ><h2>{{ 'Sections.VPItems' | translate }}</h2></ion-card-header
+  >
   <ion-card-content>
     <ion-list class="no-pointer">
       <ion-item>
-        <ion-range min="0" max="30" pin="true" ticks="true" snaps="true" (ionChange)="setVP($event)" [value]="bot.vp">
+        <ion-range
+          min="0"
+          max="30"
+          pin="true"
+          ticks="true"
+          snaps="true"
+          (ionChange)="setVP($event)"
+          [value]="bot.vp"
+        >
           <ion-label slot="start">0</ion-label>
           <ion-label slot="end">{{ bot.vp || 0 }}/30</ion-label>
         </ion-range>
@@ -13,12 +22,17 @@
       <ion-item>
         <div class="flip-container">
           @for (item of itemOrder; track item) {
-<div class="flip-icon">
-            <img [src]="'assets/inicon/token-item-' + itemImages[item] + '.png'"
-                 [ngClass]="{ 'flip-front': bot.items[item], 'flip-back': !bot.items[item] }"
-                 (click)="toggleItem(item)" />
-          </div>
-}
+            <div class="flip-icon">
+              <img
+                [src]="'assets/inicon/token-item-' + itemImages[item] + '.png'"
+                [ngClass]="{
+                  'flip-front': bot.items[item],
+                  'flip-back': !bot.items[item],
+                }"
+                (click)="toggleItem(item)"
+              />
+            </div>
+          }
         </div>
       </ion-item>
     </ion-list>

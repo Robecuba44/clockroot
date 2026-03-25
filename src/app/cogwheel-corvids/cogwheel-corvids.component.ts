@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
-import { CorvidBot } from "../models/corvid";
-import { BotService } from "../bot.service";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { CorvidBot } from '../models/corvid';
+import { BotService } from '../bot.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "app-corvid",
-  templateUrl: "./cogwheel-corvids.component.html",
-  styleUrls: ["./cogwheel-corvids.component.scss"],
+  selector: 'app-corvid',
+  templateUrl: './cogwheel-corvids.component.html',
+  styleUrls: ['./cogwheel-corvids.component.scss'],
   standalone: false,
 })
 export class CorvidComponent implements OnInit {
@@ -16,10 +16,10 @@ export class CorvidComponent implements OnInit {
   @Input() public bot: CorvidBot;
 
   public plots = [
-    { type: "bomb", name: "Bomb" },
-    { type: "snare", name: "Snare" },
-    { type: "extortion", name: "Extortion" },
-    { type: "raid", name: "Raid" },
+    { type: 'bomb', name: 'Bomb' },
+    { type: 'snare', name: 'Snare' },
+    { type: 'extortion', name: 'Extortion' },
+    { type: 'raid', name: 'Raid' },
   ];
 
   ngOnInit() {
