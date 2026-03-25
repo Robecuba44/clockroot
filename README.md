@@ -101,3 +101,10 @@ Angular: Updated one version at a time from Angular 8 -> Angular 21.2.3 (https:/
 Ionic: Updated as needed from Ionic 4 -> Ionic 7.2.1
 Lint: Migrated from TSLint to ESLint (https://github.com/angular-eslint/angular-eslint/blob/main/docs/MIGRATING_FROM_TSLINT.md)
 ```
+
+[] Toolbar randomization (may actually just be a broken difficulty selection in the html)
+[] Color for Text
+[] Slight margin for bot html
+[x] Text color for language display
+[] Check marquise display for a 6th random li
+[] marquise displays at 66% width?

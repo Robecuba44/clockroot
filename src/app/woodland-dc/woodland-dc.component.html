@@ -73,16 +73,18 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list>
-              <ion-radio-group>
+              <ion-radio-group
+                [value]="bot.difficulty"
+                (ionChange)="changeDifficulty($event.detail.value)"
+              >
                 @for (
                   diff of ['Easy', 'Normal', 'Challenging', 'Nightmare'];
                   track diff
                 ) {
-                  <ion-item>
+                  <ion-item button (click)="changeDifficulty(diff)">
                     <ion-radio
                       slot="start"
                       [value]="diff"
-                      (click)="changeDifficulty(diff)"
                     ></ion-radio>
 
                     <ion-label class="ion-text-wrap">
@@ -115,11 +117,14 @@
           <ion-card-content>
             <ion-list>
               @for (rule of bot.rules; track rule) {
-                <ion-item>
+                <ion-item
+                  button
+                  (click)="rule.canToggle && botService.toggleRule(rule)"
+                >
                   <ion-checkbox
                     slot="start"
                     [disabled]="!rule.canToggle"
-                    (click)="botService.toggleRule(rule)"
+                    (click)="botService.toggleRule(rule); $event.stopPropagation()"
                     [checked]="rule.isActive"
                   ></ion-checkbox>
 

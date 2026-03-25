@@ -18,6 +18,8 @@ export class RiverfolkComponent implements OnInit {
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
+  public tradePostMessages: MetaData[] = [];
+  public servicesMessages: MetaData[] = [];
 
   public buildings = [
     { suit: 'fox', building: 'tradingpost' },
@@ -29,6 +31,8 @@ export class RiverfolkComponent implements OnInit {
     this.birdsongMessages = this.bot.birdsong(this.translateService);
     this.daylightMessages = this.bot.daylight(this.translateService);
     this.eveningMessages = this.bot.evening(this.translateService);
+    this.tradePostMessages = this.bot.tradePost(this.translateService);
+    this.servicesMessages = this.bot.services(this.translateService);
   }
 
   toggleSetup() {

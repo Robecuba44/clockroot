@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, NgZone, computed, inject, signal } from '@angular/core';
 
 import { Bot, Difficulty, Rule, Item, BotName } from './models/bot';
 import { MarquiseBot } from './models/marquise';
@@ -23,6 +23,15 @@ import { PriorityModalComponent } from './priority-modal/priority-modal.componen
 export class BotService {
   private modalCtrl = inject(ModalController);
   private alertCtrl = inject(AlertController);
+  private ngZone = inject(NgZone);
+
+  /** Drives `ion-split-pane` without `appRef.tick()` (avoids NG0100 on AppComponent). */
+  private readonly botsLengthSig = signal(0);
+  readonly splitPaneDisabled = computed(() => this.botsLengthSig() === 0);
+
+  private syncSplitPaneFromBots(): void {
+    this.botsLengthSig.set(this.bots.length);
+  }
 
   public botHash: Record<BotName, unknown> = {
     Marquise: MarquiseBot,
@@ -217,7 +226,7 @@ export class BotService {
       return;
     }
 
-    this.bots.push(bot);
+    this.bots = [...this.bots, bot];
     this.saveBots();
   }
 
@@ -235,8 +244,10 @@ export class BotService {
         {
           text: 'Yes, remove!',
           handler: () => {
-            this.bots = this.bots.filter((x) => x !== bot);
-            this.saveBots();
+            this.ngZone.run(() => {
+              this.bots = this.bots.filter((x) => x !== bot);
+              this.saveBots();
+            });
           },
         },
       ],
@@ -306,11 +317,9 @@ export class BotService {
       return;
     }
 
-    // update the view immediately
-    setTimeout(() => {
-      rule.isActive = !rule.isActive;
-      this.saveBots();
-    }, 0);
+    // Toggle immediately so UI state doesn't lag behind the user's click.
+    rule.isActive = !rule.isActive;
+    this.saveBots();
   }
 
   public goToBot(botName: string) {
@@ -319,6 +328,7 @@ export class BotService {
 
   public saveBots() {
     localStorage.setItem('bots', JSON.stringify(this.bots));
+    this.syncSplitPaneFromBots();
   }
 
   private loadBots() {
@@ -352,6 +362,7 @@ export class BotService {
       this.generateTraitHash(botRef);
       this.bots.push(botRef);
     });
+    this.syncSplitPaneFromBots();
   }
 
   public async showPriorities() {

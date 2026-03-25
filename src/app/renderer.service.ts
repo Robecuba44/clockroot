@@ -6,7 +6,7 @@ import { marked, Renderer } from 'marked';
   providedIn: 'root',
 })
 export class RendererService {
-  private renderer: any;
+  private renderer: Renderer;
 
   constructor() {
     this.renderer = this.getCustomRenderer();
@@ -34,6 +34,7 @@ export class RendererService {
     if (!str) {
       return '';
     }
-    return marked(str, { renderer: this.renderer });
+    const rendered = marked(str, { renderer: this.renderer });
+    return rendered;
   }
 }

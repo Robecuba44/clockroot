@@ -18,6 +18,7 @@ export class EyrieComponent implements OnInit {
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
+  public turmoilMessages: MetaData[] = [];
 
   ngOnInit() {
     this.bot.customData.buildings = this.bot.customData.buildings || [];
@@ -28,6 +29,7 @@ export class EyrieComponent implements OnInit {
     this.birdsongMessages = this.bot.birdsong(this.translateService);
     this.daylightMessages = this.bot.daylight(this.translateService);
     this.eveningMessages = this.bot.evening(this.translateService);
+    this.turmoilMessages = this.bot.turmoil(this.translateService);
   }
 
   toggleSetup() {

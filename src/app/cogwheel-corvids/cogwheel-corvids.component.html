@@ -75,17 +75,16 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list>
-              <ion-radio-group>
+              <ion-radio-group
+                [value]="bot.difficulty"
+                (ionChange)="changeDifficulty($event.detail.value)"
+              >
                 @for (
                   diff of ['Easy', 'Normal', 'Challenging', 'Nightmare'];
                   track diff
                 ) {
-                  <ion-item>
-                    <ion-radio
-                      slot="start"
-                      [value]="diff"
-                      (click)="changeDifficulty(diff)"
-                    ></ion-radio>
+                  <ion-item button (click)="changeDifficulty(diff)">
+                    <ion-radio slot="start" [value]="diff"></ion-radio>
 
                     <ion-label class="ion-text-wrap">
                       <h2>{{ 'BotSetup.Difficulty.' + diff | translate }}</h2>
@@ -117,11 +116,14 @@
           <ion-card-content>
             <ion-list>
               @for (rule of bot.rules; track rule) {
-                <ion-item>
+                <ion-item
+                  button
+                  (click)="rule.canToggle && botService.toggleRule(rule)"
+                >
                   <ion-checkbox
                     slot="start"
                     [disabled]="!rule.canToggle"
-                    (click)="botService.toggleRule(rule)"
+                    (click)="botService.toggleRule(rule); $event.stopPropagation()"
                     [checked]="rule.isActive"
                   ></ion-checkbox>
 
@@ -348,7 +350,7 @@
             }}
           </h4>
           <ol>
-            @for (message of bot.plotRules(translateService); track message) {
+            @for (message of plotRuleMessages; track $index) {
               <li class="rule-message">
                 <para [bot]="bot" [metadata]="message"></para>
               </li>
@@ -361,7 +363,7 @@
             }}
           </h4>
           <ol>
-            @for (message of bot.botRules(translateService); track message) {
+            @for (message of botRuleMessages; track $index) {
               <li class="rule-message">
                 <para [bot]="bot" [metadata]="message"></para>
               </li>

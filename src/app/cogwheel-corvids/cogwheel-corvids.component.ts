@@ -18,6 +18,8 @@ export class CorvidComponent implements OnInit {
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
+  public plotRuleMessages: MetaData[] = [];
+  public botRuleMessages: MetaData[] = [];
 
   public plots = [
     { type: 'bomb', name: 'Bomb' },
@@ -39,6 +41,8 @@ export class CorvidComponent implements OnInit {
     this.birdsongMessages = this.bot.birdsong(this.translateService);
     this.daylightMessages = this.bot.daylight(this.translateService);
     this.eveningMessages = this.bot.evening(this.translateService);
+    this.plotRuleMessages = this.bot.plotRules(this.translateService);
+    this.botRuleMessages = this.bot.botRules(this.translateService);
   }
 
   toggleSetup() {

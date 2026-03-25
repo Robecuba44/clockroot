@@ -18,6 +18,7 @@ export class LizardComponent implements OnInit {
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
+  public extraMessages: MetaData[] = [];
 
   public buildings = [
     { suit: 'fox', building: 'garden' },
@@ -36,6 +37,7 @@ export class LizardComponent implements OnInit {
     this.birdsongMessages = this.bot.birdsong(this.translateService);
     this.daylightMessages = this.bot.daylight(this.translateService);
     this.eveningMessages = this.bot.evening(this.translateService);
+    this.extraMessages = this.bot.extra(this.translateService);
   }
 
   toggleSetup() {

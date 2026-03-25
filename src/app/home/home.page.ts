@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
 
 import { AlertController, PopoverController } from '@ionic/angular';
 import { FactionMenuComponent } from '../faction-menu/faction-menu.component';
@@ -13,6 +13,7 @@ import { BotService } from '../bot.service';
 export class HomePage {
   private popoverCtrl = inject(PopoverController);
   private alertCtrl = inject(AlertController);
+  private ngZone = inject(NgZone);
   botService = inject(BotService);
 
   public async addBot(ev) {
@@ -27,8 +28,11 @@ export class HomePage {
       if (!res || !res.data) {
         return;
       }
-
-      this.botService.addBot(new this.botService.botHash[res.data]());
+      this.ngZone.run(() =>
+        this.botService.addBot(
+          new (this.botService.botHash[res.data] as new () => import('../models/bot').Bot)(),
+        ),
+      );
     });
 
     return await popover.present();
@@ -48,7 +52,7 @@ export class HomePage {
         {
           text: 'Yes, reset!',
           handler: () => {
-            this.botService.clearBots();
+            this.ngZone.run(() => this.botService.clearBots());
           },
         },
       ],
