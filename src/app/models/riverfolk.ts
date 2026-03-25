@@ -1,126 +1,211 @@
-import { TranslateService } from '@ngx-translate/core';
-import { Bot, BotName } from './bot';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-import { NEVER } from 'rxjs';
+import { TranslateService } from "@ngx-translate/core";
+import { Bot, BotName } from "./bot";
+import { NEVER } from "rxjs";
 
 export class RiverfolkBot extends Bot {
+  public name: BotName = "Riverfolk";
 
-  public name: BotName = 'Riverfolk';
-
-  public setupPosition = 'G';
-  public setupRules = [
-    `Setup0`,
-    `Setup1`,
-    `Setup2`,
-    `Setup3`,
-    `Setup4`
-  ];
+  public setupPosition = "G";
+  public setupRules = [`Setup0`, `Setup1`, `Setup2`, `Setup3`, `Setup4`];
 
   public difficultyDescriptions = {
     Easy: `Easy`,
-    Normal: 'Normal',
+    Normal: "Normal",
     Challenging: `Challenging`,
-    Nightmare: `Nightmare`
+    Nightmare: `Nightmare`,
   };
 
   public rules = [
     {
-      traitName: 'Poor Manual Dexterity',
-      name: 'RulePoorManualDexterity',
+      traitName: "Poor Manual Dexterity",
+      name: "RulePoorManualDexterity",
       text: `TextPoorManualDexterity`,
-      isActive: true
+      isActive: true,
     },
     {
-      traitName: 'Hates Surprises',
-      name: 'RuleHatesSurprises',
-      text: 'TextHatesSurprises',
-      isActive: true
+      traitName: "Hates Surprises",
+      name: "RuleHatesSurprises",
+      text: "TextHatesSurprises",
+      isActive: true,
     },
     {
-      traitName: 'Market',
-      name: 'RuleMarket',
-      text: 'TextMarket',
-      isActive: true
+      traitName: "Market",
+      name: "RuleMarket",
+      text: "TextMarket",
+      isActive: true,
     },
     {
-      traitName: 'Garrison',
-      name: 'RuleGarrison',
-      text: 'TextGarrison',
-      canToggle: true
+      traitName: "Garrison",
+      name: "RuleGarrison",
+      text: "TextGarrison",
+      canToggle: true,
     },
     {
-      traitName: 'Greedy',
-      name: 'RuleGreedy',
-      text: 'TextGreedy',
-      canToggle: true
+      traitName: "Greedy",
+      name: "RuleGreedy",
+      text: "TextGreedy",
+      canToggle: true,
     },
     {
-      traitName: 'Ferocious',
-      name: 'RuleFerocious',
+      traitName: "Ferocious",
+      name: "RuleFerocious",
       text: `TextFerocious`,
-      canToggle: true
+      canToggle: true,
     },
     {
-      traitName: 'Involved',
-      name: 'RuleInvolved',
+      traitName: "Involved",
+      name: "RuleInvolved",
       text: `TextInvolved`,
-      canToggle: true
+      canToggle: true,
     },
   ];
   //Will need a check for protectionism to determine several key actions, will need a tracker for trade posts and services and payments? May be an annoying one but seems straight forward overall
   public customData = {
-    currentSuit: 'bird',
+    currentSuit: "bird",
 
     buildings: {
       fox: [],
       bunny: [],
-      mouse: []
+      mouse: [],
     },
     protectionismShield: false,
-    protectionismSword: false
+    protectionismSword: false,
   };
 
-  public setup(): void {
-  }
+  public setup(): void {}
 
   public birdsong(translate: TranslateService) {
-    
     return [
-      this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Riverfolk Robots.StockMarket`)),
-      this.createMetaData('score', 1, translate.instant(`SpecificBirdsong.Riverfolk Robots.CraftOrder`)),
-      this.createMetaData('text', '', translate.instant(`SpecificBirdsong.Riverfolk Robots.SetOrder`))
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificBirdsong.Riverfolk Robots.StockMarket`),
+      ),
+      this.createMetaData(
+        "score",
+        1,
+        translate.instant(`SpecificBirdsong.Riverfolk Robots.CraftOrder`),
+      ),
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificBirdsong.Riverfolk Robots.SetOrder`),
+      ),
     ];
   }
-  
+
   public daylight(translate: TranslateService) {
     const suit = this.customData.currentSuit;
-    const riverDifficulty = (this.difficulty === "Easy" ? 0 : this.difficulty === "Normal" ? 1 : this.difficulty === "Challenging" ? 2 : 2);
+    const riverDifficulty =
+      this.difficulty === "Easy"
+        ? 0
+        : this.difficulty === "Normal"
+          ? 1
+          : this.difficulty === "Challenging"
+            ? 2
+            : 2;
     const checkBird = suit === "bird" ? true : false;
     const base = [
-      this.createMetaData('text', '', translate.instant(`SpecificDaylight.Riverfolk Robots.BuildAndGarrison`, {riverDifficulty, suit})),
-    ]
-    base.push( checkBird? this.createMetaData('text', '', translate.instant(`SpecificDaylight.Riverfolk Robots.RecruitOther`, {suit})) : this.createMetaData('text', '', translate.instant(`SpecificDaylight.Riverfolk Robots.RecruitBird`)))
-    base.push(this.createMetaData('score', 1, translate.instant(`SpecificDaylight.Riverfolk Robots.Organize`)))
-    this.customData.protectionismShield ? base.push(this.createMetaData('text', '', translate.instant(`SpecificDaylight.Riverfolk Robots.BattleShield`))) : NEVER,
-    this.customData.protectionismSword ? base.push(this.createMetaData('text', '', translate.instant(`SpecificDaylight.Riverfolk Robots.BattleSword`,{suit}))) : NEVER
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(
+          `SpecificDaylight.Riverfolk Robots.BuildAndGarrison`,
+          { riverDifficulty, suit },
+        ),
+      ),
+    ];
+    base.push(
+      checkBird
+        ? this.createMetaData(
+            "text",
+            "",
+            translate.instant(
+              `SpecificDaylight.Riverfolk Robots.RecruitOther`,
+              { suit },
+            ),
+          )
+        : this.createMetaData(
+            "text",
+            "",
+            translate.instant(`SpecificDaylight.Riverfolk Robots.RecruitBird`),
+          ),
+    );
+    base.push(
+      this.createMetaData(
+        "score",
+        1,
+        translate.instant(`SpecificDaylight.Riverfolk Robots.Organize`),
+      ),
+    );
+    (this.customData.protectionismShield
+      ? base.push(
+          this.createMetaData(
+            "text",
+            "",
+            translate.instant(`SpecificDaylight.Riverfolk Robots.BattleShield`),
+          ),
+        )
+      : NEVER,
+      this.customData.protectionismSword
+        ? base.push(
+            this.createMetaData(
+              "text",
+              "",
+              translate.instant(
+                `SpecificDaylight.Riverfolk Robots.BattleSword`,
+                { suit },
+              ),
+            ),
+          )
+        : NEVER);
     return base;
   }
 
   public evening(translate: TranslateService) {
     const eveningActions = [
-    this.createMetaData('score', 1, translate.instant(`SpecificEvening.Riverfolk Robots.Score`)),
-    this.createMetaData('text', '', translate.instant(`SpecificEvening.Riverfolk Robots.Discard`))
-    ]
+      this.createMetaData(
+        "score",
+        1,
+        translate.instant(`SpecificEvening.Riverfolk Robots.Score`),
+      ),
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificEvening.Riverfolk Robots.Discard`),
+      ),
+    ];
 
-    if (this.customData.protectionismShield || this.customData.protectionismSword) {
-      eveningActions.push(this.createMetaData('text', '', translate.instant(`SpecificEvening.Riverfolk Robots.Racketeering`)))
+    if (
+      this.customData.protectionismShield ||
+      this.customData.protectionismSword
+    ) {
+      eveningActions.push(
+        this.createMetaData(
+          "text",
+          "",
+          translate.instant(`SpecificEvening.Riverfolk Robots.Racketeering`),
+        ),
+      );
     }
     if (this.customData.protectionismShield) {
-      eveningActions.push(this.createMetaData('text', '', translate.instant(`SpecificEvening.Riverfolk Robots.DiscardShield`)))
-    }
-    if (this.difficulty === 'Nightmare') {
       eveningActions.push(
-        this.createMetaData('score', 1, translate.instant('SpecificEvening.Electric Eyrie (DC).NightmareScore'))
+        this.createMetaData(
+          "text",
+          "",
+          translate.instant(`SpecificEvening.Riverfolk Robots.DiscardShield`),
+        ),
+      );
+    }
+    if (this.difficulty === "Nightmare") {
+      eveningActions.push(
+        this.createMetaData(
+          "score",
+          1,
+          translate.instant(
+            "SpecificEvening.Electric Eyrie (DC).NightmareScore",
+          ),
+        ),
       );
     }
     return eveningActions;
@@ -128,19 +213,50 @@ export class RiverfolkBot extends Bot {
 
   public services(translate: TranslateService) {
     const base = [
-    this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.servicesBirdsong`)),
-    this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.servicesCost`) +
-    translate.instant(`SpecificExtra.Riverfolk Robots.servicesVictoryPoints`)),
-  ];
-  base.push(this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.serviceBoat`)))
-  base.push(this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.serviceCard`)))
-  base.push(this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.serviceMerc`)))
-  return base
-}
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.servicesBirdsong`),
+      ),
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.servicesCost`) +
+          translate.instant(
+            `SpecificExtra.Riverfolk Robots.servicesVictoryPoints`,
+          ),
+      ),
+    ];
+    base.push(
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.serviceBoat`),
+      ),
+    );
+    base.push(
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.serviceCard`),
+      ),
+    );
+    base.push(
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.serviceMerc`),
+      ),
+    );
+    return base;
+  }
   public tradePost(translate: TranslateService) {
-  return [
-    this.createMetaData('text','',translate.instant(`SpecificExtra.Riverfolk Robots.tradePost`))
-  ];
+    return [
+      this.createMetaData(
+        "text",
+        "",
+        translate.instant(`SpecificExtra.Riverfolk Robots.tradePost`),
+      ),
+    ];
+  }
 }
-
- }
