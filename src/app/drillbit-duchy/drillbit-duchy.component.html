@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
 <ion-toolbar color="primary">
   <ion-title>
     <span id="Duchy">
@@ -44,7 +45,12 @@
           <ion-card-content>
             <ol>
               <li>
-                <a (click)="botService.showPriorities()">{{
+                <a
+                  (click)="botService.showPriorities()"
+                  (keydown.enter)="botService.showPriorities()"
+                  tabindex="0"
+                  role="button"
+                >{{
                   'BotSetup.PriorityMarkers' | translate
                 }}</a>
               </li>
@@ -213,6 +219,7 @@
                       <div class="citadel-container">
                         <img
                           src="assets/inicon/building-citadel.png"
+                          alt=""
                           [class.transparent]="!bot.customData.citadels[num]"
                           (click)="toggleTracker('citadels', num)"
                         />
@@ -221,11 +228,13 @@
                           <div class="meeple-overlay">
                             <img
                               src="assets/inicon/meeple-duchy.png"
+                              alt=""
                               class="meeple"
                             />
                             @if (i === 2) {
                               <img
                                 src="assets/inicon/meeple-duchy.png"
+                                alt=""
                                 class="meeple"
                               />
                             }
@@ -241,6 +250,7 @@
                     @for (num of [0, 1, 2]; track num) {
                       <img
                         src="assets/inicon/building-market.png"
+                        alt=""
                         [class.transparent]="!bot.customData.markets[num]"
                         (click)="toggleTracker('markets', num)"
                       />
@@ -252,6 +262,7 @@
                     @for (num of [0, 1, 2]; track num) {
                       <img
                         src="assets/inicon/token-tunnel.png"
+                        alt=""
                         [class.transparent]="!bot.customData.tunnels[num]"
                         (click)="toggleTracker('tunnels', num)"
                       />
@@ -265,6 +276,7 @@
                       <img
                         id="burrow"
                         [src]="'assets/inicon/' + 'building-burrow.png'"
+                        alt=""
                       />
                     </div>
 
@@ -299,6 +311,7 @@
                   >
                     <img
                       [src]="'assets/inicon/card-' + minister.suit + '.png'"
+                      alt=""
                       class="minister-suit"
                     />
 
@@ -313,7 +326,7 @@
                     </div>
 
                     <div class="minister-toggle">
-                      <img [src]="'assets/inicon/token-crown' + '.png'" />
+                      <img [src]="'assets/inicon/token-crown' + '.png'" alt="" />
                     </div>
                   </div>
                 }
@@ -342,6 +355,7 @@
                     class="click-icon"
                     slot="icon-only"
                     [src]="'assets/inicon/card-' + suit + '.png'"
+                    alt=""
                   />
                 </ion-button>
               }
@@ -351,7 +365,7 @@
             <ol>
               @for (message of birdsongMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -372,7 +386,7 @@
             <ol>
               @for (message of daylightMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -393,7 +407,7 @@
             <ol>
               @for (message of eveningMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>

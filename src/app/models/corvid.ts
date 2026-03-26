@@ -65,7 +65,11 @@ export class CorvidBot extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    stowedPlots: number;
+    plots: Record<string, boolean[]>;
+  } = {
     currentSuit: 'bird',
     stowedPlots: 8, //Tracks number of plots currently stowed, not face-up or face-down on board
     plots: {
@@ -76,7 +80,9 @@ export class CorvidBot extends Bot {
     },
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     const suit = this.customData.currentSuit;
@@ -212,8 +218,6 @@ export class CorvidBot extends Bot {
   }
 
   public botRules(translate: TranslateService) {
-    const suit = this.customData.currentSuit;
-
     return [
       this.createMetaData(
         'text',

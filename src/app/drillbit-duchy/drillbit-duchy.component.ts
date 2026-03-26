@@ -1,21 +1,28 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { DuchyBot } from '../models/duchy';
 import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MetaData } from '../paragraph/paragraph.component';
-
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { MetaData, ParagraphComponent } from '../paragraph/paragraph.component';
+import { IonicModule } from '@ionic/angular';
+import { BotResourcesComponent } from '../bot-resources/bot-resources.component';
+import { FormatPipe } from '../format.pipe';
 @Component({
   selector: 'app-duchy',
   templateUrl: './drillbit-duchy.component.html',
   styleUrls: ['./drillbit-duchy.component.scss'],
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
+  imports: [
+    IonicModule,
+    BotResourcesComponent,
+    ParagraphComponent,
+    TranslatePipe,
+    FormatPipe,
+  ],
 })
 export class DuchyComponent implements OnInit {
   botService = inject(BotService);
   translateService = inject(TranslateService);
 
-  @Input() public bot: DuchyBot;
+  @Input() public bot!: DuchyBot;
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];

@@ -65,7 +65,12 @@ export class LizardBot extends Bot {
     },
   ];
   // This one is gonna need a sermon on the mount with how whacky Lizards is. SpecificExtras may need to be used to address Lost Souls, Conspiracies, Acolytes... I'll probably think about this one last.
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    buildings: Record<string, boolean[]>;
+    acolyteTracker: number;
+    conspiracyIndex: number;
+  } = {
     currentSuit: 'bird',
 
     buildings: {
@@ -78,7 +83,9 @@ export class LizardBot extends Bot {
     conspiracyIndex: 4,
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     const suit = this.customData.currentSuit;
@@ -105,7 +112,6 @@ export class LizardBot extends Bot {
   }
 
   public daylight(translate: TranslateService) {
-    const suit = this.customData.currentSuit;
     const difficulty =
       this.difficulty === 'Easy'
         ? 3
@@ -114,7 +120,6 @@ export class LizardBot extends Bot {
           : this.difficulty === 'Challenging'
             ? 5
             : 5;
-    const checkBird = suit === 'bird';
     const base = [];
 
     base.push(
@@ -203,8 +208,6 @@ export class LizardBot extends Bot {
   }
 
   public extra(translate: TranslateService) {
-    const suit = this.customData.currentSuit;
-
     return [
       this.createMetaData(
         'text',

@@ -151,7 +151,9 @@ export class DuchyBot extends Bot {
     ],
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     const citadelUsedLength = this.customData.citadels.filter(
@@ -159,7 +161,7 @@ export class DuchyBot extends Bot {
     ).length;
     const moleRevealed =
       (citadelUsedLength === 3 ? 4 : citadelUsedLength) +
-      (this.customData.ministers.find((m) => m.id === 'foremole').swayed
+      (this.customData.ministers.find((m) => m.id === 'foremole')?.swayed
         ? 1
         : 0);
     const moleDifficulty =
@@ -196,22 +198,22 @@ export class DuchyBot extends Bot {
   public daylight(translate: TranslateService) {
     const suit = this.customData.currentSuit;
 
-    const isCaptainSwayed = this.customData.ministers.find(
+    const isCaptainSwayed = !!this.customData.ministers.find(
       (m) => m.id === 'captain',
-    ).swayed;
+    )?.swayed;
     const hasTunnelSupply =
       this.customData.tunnels.filter((m) => m === true).length === 0;
     const isBirdOrder = this.customData.currentSuit === 'bird' ? 'Bird' : '';
     const pointsEarl = this.customData.ministers.find((m) => m.id === 'earl')
-      .swayed
+      ?.swayed
       ? this.customData.citadels.filter((m) => m === false).length
       : 0;
     const pointsBaron = this.customData.ministers.find((m) => m.id === 'baron')
-      .swayed
+      ?.swayed
       ? this.customData.markets.filter((m) => m === false).length
       : 0;
     const pointsDuchess =
-      this.customData.ministers.find((m) => m.id === 'duchess').swayed &&
+      !!this.customData.ministers.find((m) => m.id === 'duchess')?.swayed &&
       this.customData.tunnels.filter((m) => m === true).length === 0
         ? 2
         : 0;

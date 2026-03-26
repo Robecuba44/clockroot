@@ -1,20 +1,28 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { WoodlandBot } from '../models/woodland';
 import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MetaData } from '../paragraph/paragraph.component';
-
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { MetaData, ParagraphComponent } from '../paragraph/paragraph.component';
+import { IonicModule } from '@ionic/angular';
+import { BotResourcesComponent } from '../bot-resources/bot-resources.component';
+import { FormatPipe } from '../format.pipe';
 @Component({
   selector: 'app-woodland',
   templateUrl: './woodland.component.html',
   styleUrls: ['./woodland.component.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    BotResourcesComponent,
+    ParagraphComponent,
+    TranslatePipe,
+    FormatPipe,
+  ],
 })
-export class WoodlandComponent {
+export class WoodlandComponent implements OnInit {
   botService = inject(BotService);
   translateService = inject(TranslateService);
 
-  @Input() public bot: WoodlandBot;
+  @Input() public bot!: WoodlandBot;
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
@@ -47,13 +55,13 @@ export class WoodlandComponent {
     this.refreshTurnMessages();
   }
 
-  toggleSympathy(pos) {
+  toggleSympathy(pos: number) {
     this.bot.customData.sympathy[pos] = !this.bot.customData.sympathy[pos];
     this.botService.saveBots();
     this.refreshTurnMessages();
   }
 
-  toggleBuilding(suit) {
+  toggleBuilding(suit: string) {
     this.bot.customData.buildings[suit] = !this.bot.customData.buildings[suit];
     this.botService.saveBots();
     this.refreshTurnMessages();

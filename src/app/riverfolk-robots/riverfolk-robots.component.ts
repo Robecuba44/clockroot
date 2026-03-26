@@ -1,27 +1,38 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { RiverfolkBot } from '../models/riverfolk';
 import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MetaData } from '../paragraph/paragraph.component';
-
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { MetaData, ParagraphComponent } from '../paragraph/paragraph.component';
+import { IonicModule } from '@ionic/angular';
+import { BotResourcesComponent } from '../bot-resources/bot-resources.component';
+import { FormatPipe } from '../format.pipe';
 @Component({
   selector: 'app-riverfolk',
   templateUrl: './riverfolk-robots.component.html',
   styleUrls: ['./riverfolk-robots.component.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    BotResourcesComponent,
+    ParagraphComponent,
+    TranslatePipe,
+    FormatPipe,
+  ],
 })
 export class RiverfolkComponent implements OnInit {
   botService = inject(BotService);
   translateService = inject(TranslateService);
 
-  @Input() public bot: RiverfolkBot;
+  @Input() public bot!: RiverfolkBot;
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
   public tradePostMessages: MetaData[] = [];
   public servicesMessages: MetaData[] = [];
 
-  public buildings = [
+  public buildings: {
+    suit: 'fox' | 'bunny' | 'mouse';
+    building: 'tradingpost';
+  }[] = [
     { suit: 'fox', building: 'tradingpost' },
     { suit: 'bunny', building: 'tradingpost' },
     { suit: 'mouse', building: 'tradingpost' },
@@ -59,7 +70,7 @@ export class RiverfolkComponent implements OnInit {
     this.refreshTurnMessages();
   }
 
-  toggleBuilding(suit, index) {
+  toggleBuilding(suit: 'fox' | 'bunny' | 'mouse', index: number) {
     this.bot.customData.buildings[suit] =
       this.bot.customData.buildings[suit] || [];
     this.bot.customData.buildings[suit][index] =

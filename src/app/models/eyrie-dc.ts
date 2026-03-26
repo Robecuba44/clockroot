@@ -59,7 +59,10 @@ export class EyrieBotDC extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    decree: Record<string, number>;
+    buildings: boolean[];
+  } = {
     decree: {
       fox: 0,
       mouse: 0,
@@ -70,7 +73,9 @@ export class EyrieBotDC extends Bot {
     buildings: [],
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     const newRoost = !this.customData.buildings.some(Boolean);
@@ -110,8 +115,7 @@ export class EyrieBotDC extends Bot {
     const actions = [];
 
     let mostVal = 0;
-    let mostSuit = '';
-    let mostSuits = [];
+    let mostSuits: string[] = [];
     ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
       if (this.customData.decree[suit] < mostVal) {
         return;
@@ -124,7 +128,6 @@ export class EyrieBotDC extends Bot {
       }
 
       mostVal = this.customData.decree[suit];
-      mostSuit = suit;
 
       // reset if we get here
       mostSuits = [suit];
@@ -132,7 +135,6 @@ export class EyrieBotDC extends Bot {
 
     // if we have a tie for the most, we don't have a most
     if (mostSuits.length > 1) {
-      mostSuit = '';
       mostVal = 0;
     }
 

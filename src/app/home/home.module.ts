@@ -11,7 +11,7 @@ import { MarquiseComponent } from '../marquise/marquise.component';
 import { EyrieComponent } from '../eyrie/eyrie.component';
 import { WoodlandComponent } from '../woodland/woodland.component';
 import { VagabondComponent } from '../vagabond/vagabond.component';
-import { SharedModule } from '../shared.module';
+
 import { FormatPipe } from '../format.pipe';
 import { MarquiseDCComponent } from '../marquise-dc/marquise-dc.component';
 import { EyrieDCComponent } from '../eyrie-dc/eyrie-dc.component';
@@ -29,15 +29,12 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: HomePage,
       },
     ]),
-  ],
-  declarations: [
     HomePage,
     BotResourcesComponent,
     ParagraphComponent,

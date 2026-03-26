@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
 <ion-toolbar color="primary">
   <ion-title>
     <span id="Eyrie">
@@ -44,7 +45,12 @@
           <ion-card-content>
             <ol>
               <li>
-                <a (click)="botService.showPriorities()">{{
+                <a
+                  (click)="botService.showPriorities()"
+                  (keydown.enter)="botService.showPriorities()"
+                  tabindex="0"
+                  role="button"
+                >{{
                   'BotSetup.PriorityMarkers' | translate
                 }}</a>
               </li>
@@ -211,7 +217,7 @@
             @for (suit of ['fox', 'mouse', 'bunny', 'bird']; track suit) {
               <div class="decree-row">
                 <div class="row-icon">
-                  <img [src]="'assets/inicon/card-' + suit + '.png'" />
+                  <img [src]="'assets/inicon/card-' + suit + '.png'" alt="" />
                 </div>
 
                 <div class="row-additions">
@@ -237,13 +243,20 @@
                   <div class="flip-icon">
                     <img
                       [src]="'assets/inicon/building-roost.png'"
+                      alt=""
                       class="flip-back"
                       [class.transparent]="bot.customData.buildings[num]"
                       (click)="toggleBuilding(num)"
                     />
 
                     @if (bot.customData.buildings[num]) {
-                      <div class="flip-front" (click)="toggleBuilding(num)">
+                      <div
+                        class="flip-front"
+                        (click)="toggleBuilding(num)"
+                        (keydown.enter)="toggleBuilding(num)"
+                        tabindex="0"
+                        role="button"
+                      >
                         +{{ num }}
                       </div>
                     }
@@ -270,7 +283,7 @@
             <ol>
               @for (message of birdsongMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -291,7 +304,7 @@
             <ol>
               @for (message of daylightMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -312,7 +325,7 @@
             <ol>
               @for (message of eveningMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -339,7 +352,7 @@
             <ol>
               @for (message of turmoilMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>

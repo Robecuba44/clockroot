@@ -1,27 +1,40 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { CorvidBot } from '../models/corvid';
 import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MetaData } from '../paragraph/paragraph.component';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { MetaData, ParagraphComponent } from '../paragraph/paragraph.component';
+import { IonicModule } from '@ionic/angular';
+import { BotResourcesComponent } from '../bot-resources/bot-resources.component';
+import { FormatPipe } from '../format.pipe';
 
+type PlotType = 'bomb' | 'snare' | 'extortion' | 'raid';
 @Component({
   selector: 'app-corvid',
   templateUrl: './cogwheel-corvids.component.html',
   styleUrls: ['./cogwheel-corvids.component.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    BotResourcesComponent,
+    ParagraphComponent,
+    TranslatePipe,
+    FormatPipe,
+  ],
 })
 export class CorvidComponent implements OnInit {
   botService = inject(BotService);
   translateService = inject(TranslateService);
 
-  @Input() public bot: CorvidBot;
+  @Input() public bot!: CorvidBot;
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
   public plotRuleMessages: MetaData[] = [];
   public botRuleMessages: MetaData[] = [];
 
-  public plots = [
+  public plots: {
+    type: PlotType;
+    name: string;
+  }[] = [
     { type: 'bomb', name: 'Bomb' },
     { type: 'snare', name: 'Snare' },
     { type: 'extortion', name: 'Extortion' },
@@ -31,7 +44,8 @@ export class CorvidComponent implements OnInit {
   ngOnInit() {
     this.plots.forEach((p) => {
       this.bot.customData.plots[p.type] = this.bot.customData.plots[p.type] || [
-        0, 0,
+        false,
+        false,
       ];
     });
     this.refreshTurnMessages();
@@ -62,7 +76,7 @@ export class CorvidComponent implements OnInit {
   }
 
   // Cycles the plot token: //true = face-up // false = stowed or face-down
-  cyclePlot(type: string, index: number) {
+  cyclePlot(type: PlotType, index: number) {
     this.bot.customData.plots[type][index] =
       !this.bot.customData.plots[type][index];
     const botPlot = this.bot.customData.plots;
@@ -98,7 +112,7 @@ export class CorvidComponent implements OnInit {
   modifyPlot(diff = 1, event?: Event) {
     if (event) {
       event.preventDefault();
-      event.stopPropagation;
+      event.stopPropagation();
     }
     this.bot.customData.stowedPlots = Math.max(
       this.bot.customData.stowedPlots + diff,

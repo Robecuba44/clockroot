@@ -59,7 +59,10 @@ export class EyrieBot extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    decree: Record<string, number>;
+    buildings: boolean[];
+  } = {
     decree: {
       fox: 0,
       mouse: 0,
@@ -113,7 +116,7 @@ export class EyrieBot extends Bot {
 
     let mostVal = 0;
     let mostSuit = '';
-    let mostSuits = [];
+    let mostSuits: string[] = [];
     ['fox', 'mouse', 'bunny', 'bird'].forEach((suit) => {
       if (this.customData.decree[suit] < mostVal) {
         return;

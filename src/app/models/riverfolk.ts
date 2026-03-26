@@ -1,6 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Bot, BotName } from './bot';
-import { NEVER } from 'rxjs';
 
 export class RiverfolkBot extends Bot {
   public name: BotName = 'Riverfolk';
@@ -60,7 +59,12 @@ export class RiverfolkBot extends Bot {
     },
   ];
   //Will need a check for protectionism to determine several key actions, will need a tracker for trade posts and services and payments? May be an annoying one but seems straight forward overall
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    buildings: Record<string, boolean[]>;
+    protectionismShield: boolean;
+    protectionismSword: boolean;
+  } = {
     currentSuit: 'bird',
 
     buildings: {
@@ -72,7 +76,9 @@ export class RiverfolkBot extends Bot {
     protectionismSword: false,
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     return [
@@ -104,7 +110,7 @@ export class RiverfolkBot extends Bot {
           : this.difficulty === 'Challenging'
             ? 2
             : 2;
-    const checkBird = suit === 'bird' ? true : false;
+    const checkBird = suit === 'bird';
     const base = [
       this.createMetaData(
         'text',
@@ -138,27 +144,27 @@ export class RiverfolkBot extends Bot {
         translate.instant(`SpecificDaylight.Riverfolk Robots.Organize`),
       ),
     );
-    (this.customData.protectionismShield
-      ? base.push(
-          this.createMetaData(
-            'text',
-            '',
-            translate.instant(`SpecificDaylight.Riverfolk Robots.BattleShield`),
-          ),
-        )
-      : NEVER,
-      this.customData.protectionismSword
-        ? base.push(
-            this.createMetaData(
-              'text',
-              '',
-              translate.instant(
-                `SpecificDaylight.Riverfolk Robots.BattleSword`,
-                { suit },
-              ),
-            ),
-          )
-        : NEVER);
+    if (this.customData.protectionismShield) {
+      base.push(
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant(`SpecificDaylight.Riverfolk Robots.BattleShield`),
+        ),
+      );
+    }
+
+    if (this.customData.protectionismSword) {
+      base.push(
+        this.createMetaData(
+          'text',
+          '',
+          translate.instant(`SpecificDaylight.Riverfolk Robots.BattleSword`, {
+            suit,
+          }),
+        ),
+      );
+    }
     return base;
   }
 

@@ -44,7 +44,7 @@ export class BotService {
     this.menuBotsSig.set([...this.bots]);
   }
 
-  public botHash: Record<BotName, unknown> = {
+  public botHash: Record<BotName, new () => Bot> = {
     Marquise: MarquiseBot,
     Eyrie: EyrieBot,
     Woodland: WoodlandBot,
@@ -276,8 +276,8 @@ export class BotService {
   }
 
   private generateTraitHash(bot: Bot) {
-    bot.traitHash = bot.rules.reduce((prev, cur) => {
-      prev[cur.traitName] = cur.isActive;
+    bot.traitHash = bot.rules.reduce<Record<string, boolean>>((prev, cur) => {
+      prev[cur.traitName] = cur.isActive ?? false;
       return prev;
     }, {});
   }
@@ -347,30 +347,48 @@ export class BotService {
 
   private loadBots() {
     const loadedBots = localStorage.getItem('bots') || '[]';
-    const parsedBots = JSON.parse(loadedBots);
+    const parsedBots: unknown = JSON.parse(loadedBots);
 
     this.bots = [];
 
-    parsedBots.forEach((bot) => {
-      if (!this.botHash[bot.name]) {
-        console.warn(`Could not find a constructor for bot: ${bot.name}`);
+    if (!Array.isArray(parsedBots)) {
+      this.syncMenuBotsFromSource();
+      this.syncSplitPaneFromBots();
+      return;
+    }
+
+    parsedBots.forEach((bot: unknown) => {
+      if (!bot || typeof bot !== 'object' || !('name' in bot)) {
+        return;
+      }
+      const typedBot = bot as {
+        name: BotName;
+        difficulty: Difficulty;
+        setupHidden?: boolean;
+        vp: number;
+        items: Bot['items'];
+        customData?: unknown;
+        rules: { isActive?: boolean }[];
+      };
+      if (!this.botHash[typedBot.name]) {
+        console.warn(`Could not find a constructor for bot: ${typedBot.name}`);
         return;
       }
 
-      const botRef = new this.botHash[bot.name]();
+      const botRef = new this.botHash[typedBot.name]();
 
-      botRef.difficulty = bot.difficulty;
-      botRef.setupHidden = !!bot.setupHidden;
-      botRef.vp = bot.vp;
-      botRef.items = bot.items;
+      botRef.difficulty = typedBot.difficulty;
+      botRef.setupHidden = !!typedBot.setupHidden;
+      botRef.vp = typedBot.vp;
+      botRef.items = typedBot.items;
       botRef.traitHash = botRef.traitHash || {};
-      botRef.customData = bot.customData || botRef.customData;
+      botRef.customData = typedBot.customData || botRef.customData;
 
       for (let i = 0; i < botRef.rules.length; i++) {
-        if (!bot.rules[i]) {
+        if (!typedBot.rules[i]) {
           continue;
         }
-        botRef.rules[i].isActive = bot.rules[i].isActive;
+        botRef.rules[i].isActive = typedBot.rules[i].isActive;
       }
 
       this.generateTraitHash(botRef);

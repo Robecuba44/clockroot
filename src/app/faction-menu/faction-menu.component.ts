@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-
+import { PopoverController, IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-faction-menu',
   templateUrl: './faction-menu.component.html',
   styleUrls: ['./faction-menu.component.scss'],
-  standalone: false,
+  imports: [IonicModule, TranslatePipe],
 })
 export class FactionMenuComponent {
   popoverCtrl = inject(PopoverController);
@@ -87,7 +87,7 @@ export class FactionMenuComponent {
     },
   ];
 
-  close(res) {
+  close(res: string) {
     this.popoverCtrl.dismiss(res);
   }
 }

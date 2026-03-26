@@ -3,19 +3,18 @@ import { Bot } from '../models/bot';
 import { BotService } from '../bot.service';
 import { RendererService } from '../renderer.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, IonicModule } from '@ionic/angular';
 
 export interface MetaData {
   text: string;
   type: string;
   value: string | number;
 }
-
 @Component({
-  selector: 'para',
+  selector: 'app-para',
   templateUrl: './paragraph.component.html',
   styleUrls: ['./paragraph.component.scss'],
-  standalone: false,
+  imports: [IonicModule],
 })
 export class ParagraphComponent {
   rendererService = inject(RendererService);
@@ -23,8 +22,8 @@ export class ParagraphComponent {
   botService = inject(BotService);
   toastController = inject(ToastController);
 
-  @Input() public metadata: MetaData;
-  @Input() public bot: Bot;
+  @Input() public metadata!: MetaData;
+  @Input() public bot!: Bot;
 
   public async updateScore(score: number): Promise<void> {
     this.bot.addVP(score);

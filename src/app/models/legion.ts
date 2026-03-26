@@ -42,7 +42,11 @@ export class LegionBot extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    hoardItems: string[];
+    itemList: string[];
+  } = {
     currentSuit: 'bird',
 
     hoardItems: [],
@@ -50,11 +54,11 @@ export class LegionBot extends Bot {
     itemList: ['sack', 'boot', 'sword', 'tea', 'coin', 'crossbow', 'hammer'],
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
-    //Allows you to reference the ordered suit as a variable locally
-    const suit = this.customData.currentSuit;
     const hoardLength =
       (this.customData.hoardItems && this.customData.hoardItems.length) || 1;
     const hoardNum = Math.min(3, Math.floor(hoardLength / 2) + 1);

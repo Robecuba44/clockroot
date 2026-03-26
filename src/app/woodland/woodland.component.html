@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
 <ion-toolbar color="primary">
   <ion-title>
     <span id="Woodland">
@@ -44,7 +45,12 @@
           <ion-card-content>
             <ol>
               <li>
-                <a (click)="botService.showPriorities()">{{
+                <a
+                  (click)="botService.showPriorities()"
+                  (keydown.enter)="botService.showPriorities()"
+                  tabindex="0"
+                  role="button"
+                >{{
                   'BotSetup.PriorityMarkers' | translate
                 }}</a>
               </li>
@@ -215,6 +221,7 @@
                   <div class="flip-icon">
                     <img
                       [src]="'assets/inicon/token-sympathy.png'"
+                      alt=""
                       class="flip-back"
                       [class.transparent]="bot.customData.sympathy[num]"
                       (click)="toggleSympathy(num)"
@@ -239,6 +246,7 @@
                   <div class="flip-icon">
                     <img
                       [src]="'assets/inicon/building-base-' + suit + '.png'"
+                      alt=""
                       class="flip-back"
                       [class.transparent]="bot.customData.buildings[suit]"
                       (click)="toggleBuilding(suit)"
@@ -277,6 +285,7 @@
                     class="click-icon"
                     slot="icon-only"
                     [src]="'assets/inicon/card-' + suit + '.png'"
+                    alt=""
                   />
                 </ion-button>
               }
@@ -286,7 +295,7 @@
             <ol>
               @for (message of birdsongMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -307,7 +316,7 @@
             <ol>
               @for (message of daylightMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -328,7 +337,7 @@
             <ol>
               @for (message of eveningMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>

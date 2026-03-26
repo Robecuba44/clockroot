@@ -65,7 +65,11 @@ export class WoodlandBotDC extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    sympathy: boolean[];
+    buildings: Record<string, boolean>;
+  } = {
     currentSuit: 'bird',
 
     sympathy: [
@@ -88,7 +92,9 @@ export class WoodlandBotDC extends Bot {
     },
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     const base = [

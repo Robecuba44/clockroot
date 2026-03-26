@@ -1,20 +1,30 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { VagaBotDC } from '../models/vagabond-dc';
 import { BotService } from '../bot.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MetaData } from '../paragraph/paragraph.component';
-
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { MetaData, ParagraphComponent } from '../paragraph/paragraph.component';
+import { IonicModule } from '@ionic/angular';
+import { BotResourcesComponent } from '../bot-resources/bot-resources.component';
+import { KeyValuePipe } from '@angular/common';
+import { FormatPipe } from '../format.pipe';
 @Component({
   selector: 'app-vagabond-dc',
   templateUrl: './vagabond-dc.component.html',
   styleUrls: ['./vagabond-dc.component.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    BotResourcesComponent,
+    ParagraphComponent,
+    KeyValuePipe,
+    TranslatePipe,
+    FormatPipe,
+  ],
 })
-export class VagabondDCComponent {
+export class VagabondDCComponent implements OnInit {
   botService = inject(BotService);
   translateService = inject(TranslateService);
 
-  @Input() public bot: VagaBotDC;
+  @Input() public bot!: VagaBotDC;
   public birdsongMessages: MetaData[] = [];
   public daylightMessages: MetaData[] = [];
   public eveningMessages: MetaData[] = [];
@@ -62,13 +72,13 @@ export class VagabondDCComponent {
     this.refreshTurnMessages();
   }
 
-  changeVaga(newVaga) {
+  changeVaga(newVaga: string) {
     this.bot.customData.chosenVaga = newVaga;
     this.botService.saveBots();
     this.refreshTurnMessages();
   }
 
-  toggleSatchelItem(item) {
+  toggleSatchelItem(item: string) {
     this.bot.customData.satchelItems[item]++;
     if (this.bot.customData.satchelItems[item] >= 4) {
       this.bot.customData.satchelItems[item] = 0;
@@ -78,7 +88,7 @@ export class VagabondDCComponent {
     this.refreshTurnMessages();
   }
 
-  removeSatchelItem($event, item) {
+  removeSatchelItem($event: Event, item: string) {
     $event.preventDefault();
     $event.stopPropagation();
     delete this.bot.customData.satchelItems[item];

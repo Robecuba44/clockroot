@@ -65,13 +65,19 @@ export class VagaBot extends Bot {
     },
   ];
 
-  public descriptions = {
+  public descriptions: Record<string, string> = {
     Tinker: `SpecificExtra.Vagabot.DescTinker`,
     Thief: 'SpecificExtra.Vagabot.DescThief',
     Ranger: 'SpecificExtra.Vagabot.DescRanger',
   };
 
-  public customData = {
+  public customData: {
+    chosenVaga: string;
+    currentSuit: string;
+    satchelItems: Record<string, number>;
+    decree: Record<string, number>;
+    buildings: boolean[];
+  } = {
     chosenVaga: '',
 
     currentSuit: 'bird',
@@ -140,7 +146,9 @@ ${translate.instant('SpecificExtra.Vagabot.Special' + vaga.customData.chosenVaga
     };
   }
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     return [
@@ -165,7 +173,7 @@ ${translate.instant('SpecificExtra.Vagabot.Special' + vaga.customData.chosenVaga
   public daylight(translate: TranslateService) {
     const actions = this.actions(this, translate);
 
-    let base = [];
+    let base: ReturnType<VagaBot['createMetaData']>[];
 
     switch (this.customData.currentSuit) {
       case 'fox': {

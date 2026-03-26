@@ -59,7 +59,10 @@ export class MarquiseBot extends Bot {
     },
   ];
 
-  public customData = {
+  public customData: {
+    currentSuit: string;
+    buildings: Record<string, boolean[]>;
+  } = {
     currentSuit: 'bird',
 
     buildings: {
@@ -69,7 +72,9 @@ export class MarquiseBot extends Bot {
     },
   };
 
-  public setup(): void {}
+  public setup(): void {
+    // Intentional empty hook for subclasses
+  }
 
   public birdsong(translate: TranslateService) {
     return [
@@ -217,7 +222,10 @@ export class MarquiseBot extends Bot {
     if (this.customData.currentSuit === 'bird') {
       const scores = ['fox', 'mouse', 'bunny'].map((suit) => {
         return (
-          buildings[suit].reduce((prev, cur) => prev + (cur ? 1 : 0), 0) - 1
+          buildings[suit].reduce(
+            (prev: number, cur: boolean) => prev + (cur ? 1 : 0),
+            0,
+          ) - 1
         );
       });
 
@@ -257,7 +265,10 @@ export class MarquiseBot extends Bot {
 
     const score = Math.max(
       0,
-      buildingsOfSuit.reduce((prev, cur) => prev + (cur ? 1 : 0), 0) - 1,
+      buildingsOfSuit.reduce(
+        (prev: number, cur: boolean) => prev + (cur ? 1 : 0),
+        0,
+      ) - 1,
     );
 
     const base = [

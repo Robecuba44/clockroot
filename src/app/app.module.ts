@@ -1,23 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslationObject,
+} from '@ngx-translate/core';
 
 import { Observable, of } from 'rxjs';
-
-import { environment } from '../environments/environment';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { FactionMenuComponent } from './faction-menu/faction-menu.component';
-import { PriorityModalComponent } from './priority-modal/priority-modal.component';
 
 import * as enUS from '../assets/i18n/en-US.json';
 import * as frFR from '../assets/i18n/fr-FR.json';
@@ -31,48 +17,30 @@ import * as ptBR from '../assets/i18n/pt-BR.json';
 import * as ruRU from '../assets/i18n/ru-RU.json';
 import * as zhCN from '../assets/i18n/zh-CN.json';
 
-const langs = {
-  'en-US': (enUS as any).default || enUS,
-  'fr-FR': (frFR as any).default || frFR,
-  'es-ES': (esES as any).default || esES,
-  'de-DE': (deDE as any).default || deDE,
-  'ja-JP': (jaJP as any).default || jaJP,
-  'ko-KR': (koKR as any).default || koKR,
-  'nl-NL': (nlNL as any).default || nlNL,
-  'pl-PL': (plPL as any).default || plPL,
-  'pt-BR': (ptBR as any).default || ptBR,
-  'ru-RU': (ruRU as any).default || ruRU,
-  'zh-CN': (zhCN as any).default || zhCN,
+interface JsonModule {
+  default?: unknown;
+}
+const getJsonContent = (module: unknown): unknown => {
+  const candidate = module as JsonModule;
+  return candidate.default ?? module;
+};
+
+const langs: Record<string, unknown> = {
+  'en-US': getJsonContent(enUS),
+  'fr-FR': getJsonContent(frFR),
+  'es-ES': getJsonContent(esES),
+  'de-DE': getJsonContent(deDE),
+  'ja-JP': getJsonContent(jaJP),
+  'ko-KR': getJsonContent(koKR),
+  'nl-NL': getJsonContent(nlNL),
+  'pl-PL': getJsonContent(plPL),
+  'pt-BR': getJsonContent(ptBR),
+  'ru-RU': getJsonContent(ruRU),
+  'zh-CN': getJsonContent(zhCN),
 };
 
 export class JSONLoader implements TranslateLoader {
-  getTranslation(lang: string): Observable<any> {
-    return of(langs[lang] || enUS);
+  getTranslation(lang: string): Observable<TranslationObject> {
+    return of((langs[lang] || enUS) as TranslationObject);
   }
 }
-
-@NgModule({
-  declarations: [FactionMenuComponent, PriorityModalComponent, AppComponent],
-  bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    FormsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: JSONLoader,
-      },
-    }),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  ],
-})
-export class AppModule {}

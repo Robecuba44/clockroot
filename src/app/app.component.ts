@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 
 import { Component, OnInit, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 
 import { addIcons } from 'ionicons';
 import {
@@ -13,23 +13,23 @@ import {
 
 import { BotService } from './bot.service';
 import { Difficulty } from './models/bot';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 const INITIAL_SEARCH = window.location.search;
 const INITIAL_HASH = window.location.hash;
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
+  imports: [IonicModule, FormsModule, TranslatePipe],
 })
 export class AppComponent implements OnInit {
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
   botService = inject(BotService);
 
-  public language: string;
+  public language = 'en-US';
   public selectedTraitCount = 1;
   public selectedDifficulty = 'Challenging';
 
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.language = localStorage.getItem('lang');
+    this.language = localStorage.getItem('lang') ?? '';
     if (!this.language) {
       const baseLang = navigator.language || 'en-US';
       if (baseLang.split('-')[0] === 'fr') {

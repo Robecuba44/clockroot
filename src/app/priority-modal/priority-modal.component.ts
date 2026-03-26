@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-
+import { ModalController, IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-priority-modal',
   templateUrl: './priority-modal.component.html',
   styleUrls: ['./priority-modal.component.scss'],
-  standalone: false,
+  imports: [IonicModule, TranslatePipe],
 })
 export class PriorityModalComponent {
   private modalCtrl = inject(ModalController);
@@ -31,7 +31,7 @@ export class PriorityModalComponent {
     },
   ];
 
-  changeMap(img) {
+  changeMap(img: string) {
     this.img = img;
   }
 

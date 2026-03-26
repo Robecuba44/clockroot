@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
 <ion-toolbar color="primary">
   <ion-title>
     <span id="Riverfolk">
@@ -44,7 +45,12 @@
           <ion-card-content>
             <ol>
               <li>
-                <a (click)="botService.showPriorities()">{{
+                <a
+                  (click)="botService.showPriorities()"
+                  (keydown.enter)="botService.showPriorities()"
+                  tabindex="0"
+                  role="button"
+                >{{
                   'BotSetup.PriorityMarkers' | translate
                 }}</a>
               </li>
@@ -217,6 +223,7 @@
                   <div class="row-icon">
                     <img
                       [src]="'assets/inicon/card-' + building.suit + '.png'"
+                      alt=""
                     />
                   </div>
 
@@ -231,6 +238,7 @@
                             building.suit +
                             '.png'
                           "
+                          alt=""
                           class="flip-back"
                           [class.transparent]="
                             bot.customData.buildings[building.suit][num]
@@ -264,6 +272,7 @@
               >
                 <img
                   src="assets/inicon/protectionism-shield.png"
+                  alt=""
                   class="protectionism-suit"
                 />
                 <div class="protectionism-info">
@@ -289,6 +298,7 @@
               >
                 <img
                   src="assets/inicon/protectionism-sword.png"
+                  alt=""
                   class="protectionism-suit"
                 />
                 <div class="protectionism-info">
@@ -330,6 +340,7 @@
                     class="click-icon"
                     slot="icon-only"
                     [src]="'assets/inicon/card-' + suit + '.png'"
+                    alt=""
                   />
                 </ion-button>
               }
@@ -339,7 +350,7 @@
             <ol>
               @for (message of birdsongMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -360,7 +371,7 @@
             <ol>
               @for (message of daylightMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -381,7 +392,7 @@
             <ol>
               @for (message of eveningMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -403,7 +414,7 @@
             <ol>
               @for (message of tradePostMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>
@@ -411,7 +422,7 @@
             <ol>
               @for (message of servicesMessages; track $index) {
                 <li class="rule-message">
-                  <para [bot]="bot" [metadata]="message"></para>
+                  <app-para [bot]="bot" [metadata]="message"></app-para>
                 </li>
               }
             </ol>

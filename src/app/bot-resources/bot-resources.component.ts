@@ -1,19 +1,20 @@
 import { Component, Input, inject } from '@angular/core';
 import { Bot, Item } from '../models/bot';
 import { BotService } from '../bot.service';
-
+import { IonicModule } from '@ionic/angular';
+import { NgClass } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-bot-resources',
   templateUrl: './bot-resources.component.html',
   styleUrls: ['./bot-resources.component.scss'],
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
+  imports: [IonicModule, NgClass, TranslatePipe],
 })
 export class BotResourcesComponent {
   private botService = inject(BotService);
 
-  @Input() public bot: Bot;
-  @Input() public isVaga: boolean;
+  @Input() public bot!: Bot;
+  @Input() public isVaga = false;
 
   public get itemImages() {
     return this.botService.itemImages;
@@ -40,11 +41,11 @@ export class BotResourcesComponent {
 
   public vagaItemOrder: Item[] = Object.keys(this.itemImages) as Item[];
 
-  setVP($event) {
+  setVP($event: CustomEvent<{ value: number }>) {
     this.botService.setVP(this.bot, $event.detail.value);
   }
 
-  toggleItem(item) {
+  toggleItem(item: Item) {
     this.botService.toggleItem(this.bot, item);
   }
 }

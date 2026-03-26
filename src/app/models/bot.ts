@@ -64,8 +64,6 @@ export interface Rule {
 }
 
 export abstract class Bot {
-  constructor() {}
-
   public abstract name: BotName;
   public abstract setupPosition: string;
 
@@ -84,7 +82,7 @@ export abstract class Bot {
   public rules: Rule[] = [];
   public vp = 0;
 
-  public customData: any = {};
+  public customData: unknown = {};
 
   public abstract setup(): void;
   public abstract daylight(translate: TranslateService): MetaData[];
@@ -104,7 +102,7 @@ export abstract class Bot {
 
   protected createMetaData(
     metatype: string,
-    metaval: any,
+    metaval: string | number,
     metatext: string,
   ): MetaData {
     const obj = {
